@@ -15,5 +15,22 @@ namespace Vtorproekt.Models
         public double ProducePayment { get; set; }
         public int StoragerId { get; set; }
 
+
+
+        public virtual Material? Material { get; set; }  
+        public virtual Employee? Producer { get; set; }  // Рабочий, который произвел сырье
+        public virtual WorkType? WorkType { get; set; }
+        public virtual Storage? Storage { get; set; }
+        public virtual Tax? TaxValue { get; set; }
+        public virtual Tax? Limit1 { get; set; }
+        public virtual Tax? Limit2 { get; set; }
+        public virtual Tax? Limit3 { get; set; }
+        public virtual Tax? Multi1 { get; set; }
+        public virtual Tax? Multi2 { get; set; }
+        public virtual Tax? Multi3 { get; set; }
+
+        public virtual Employee? Storekeeper  { get; set; } // Кладовщик, который принял сырье у рабочего и провел операцию в базе
+
+
     }
 }

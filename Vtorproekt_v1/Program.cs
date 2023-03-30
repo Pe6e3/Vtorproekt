@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using MovieForm.Data;
+using Vtorproekt.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<MovieFormContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieFormContext")));
+
+builder.Services.AddDbContext<VtorproektContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("VtorproektContext")));
 
 
 var app = builder.Build();
