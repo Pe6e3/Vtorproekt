@@ -7,9 +7,15 @@ namespace Vtorproekt.Models
         [Key] public int ProductionId { get; set; }
         public int WorkTypeId { get; set; }
         public int BaleId { get; set; }
+
+        [Range(10, 1000, ErrorMessage = "Недопустимый вес (от 10 до 1000кг)")]
         public double Weight { get; set; }
         public int StorageId { get; set; }
+
+        [DisplayFormat(DataFormatString = "{dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateOnly ProduceDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{hh:mm}", ApplyFormatInEditMode = true)]
         public TimeOnly ProduceTime { get; set; }
         public int TaxId { get; set; }
         public double ProducePayment { get; set; }
