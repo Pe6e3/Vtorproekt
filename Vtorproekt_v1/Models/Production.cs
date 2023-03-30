@@ -32,32 +32,28 @@ namespace Vtorproekt.Models
 
 
 
-        [DisplayFormat(DataFormatString = "{dd.MM.yyyy}", ApplyFormatInEditMode = true)]
-        public DateOnly ProduceDate { get; set; }
-
-
-        [DisplayFormat(DataFormatString = "{hh:mm}", ApplyFormatInEditMode = true)]
-        public TimeOnly ProduceTime { get; set; }
+        [DisplayFormat(DataFormatString = "{hh:mm dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime ProduceDate { get; set; }
 
 
 
-        [ForeignKey("TaxValue")]
+
+        [ForeignKey("Tax")]
         public int TaxId { get; set; }
-        public virtual Tax? TaxValue { get; set; }
-        public virtual Tax? Limit1 { get; set; }
-        public virtual Tax? Limit2 { get; set; }
-        public virtual Tax? Limit3 { get; set; }
-        public virtual Tax? Multi1 { get; set; }
-        public virtual Tax? Multi2 { get; set; }
-        public virtual Tax? Multi3 { get; set; }
-        public double ProducePayment { get; set; }
+        [ForeignKey("Tax")]        public virtual Tax? TaxValue { get; set; }
 
 
 
-        [ForeignKey("Storekeeper")]
-        public int StoragerId { get; set; }
-        public virtual Employee? Storekeeper { get; set; }
+
+
+       
+        [ForeignKey("Employee")]
         public virtual Employee? Producer { get; set; }
+
+
+
+
+
 
 
     }
