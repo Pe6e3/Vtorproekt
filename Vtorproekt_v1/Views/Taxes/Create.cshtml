@@ -1,0 +1,68 @@
+﻿@model Vtorproekt.Models.Tax
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Tax</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DateTax" class="control-label"></label>
+                <input asp-for="DateTax" class="form-control" />
+                <span asp-validation-for="DateTax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxValue" class="control-label"></label>
+                <input asp-for="TaxValue" class="form-control" />
+                <span asp-validation-for="TaxValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Limit1" class="control-label"></label>
+                <input asp-for="Limit1" class="form-control" />
+                <span asp-validation-for="Limit1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Limit2" class="control-label"></label>
+                <input asp-for="Limit2" class="form-control" />
+                <span asp-validation-for="Limit2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Limit3" class="control-label"></label>
+                <input asp-for="Limit3" class="form-control" />
+                <span asp-validation-for="Limit3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Multi1" class="control-label"></label>
+                <input asp-for="Multi1" class="form-control" />
+                <span asp-validation-for="Multi1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Multi2" class="control-label"></label>
+                <input asp-for="Multi2" class="form-control" />
+                <span asp-validation-for="Multi2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Multi3" class="control-label"></label>
+                <input asp-for="Multi3" class="form-control" />
+                <span asp-validation-for="Multi3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

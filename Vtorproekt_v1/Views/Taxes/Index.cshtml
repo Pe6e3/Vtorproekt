@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Vtorproekt.Models.Tax>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Limit1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Limit2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Limit3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Multi1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Multi2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Multi3)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Limit1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Limit2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Limit3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Multi1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Multi2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Multi3)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TaxId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TaxId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TaxId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

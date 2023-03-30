@@ -12,29 +12,29 @@ namespace Vtorproekt.Controllers
 {
     public class BalesController : Controller
     {
-        private readonly VtorproektContext _context;
+        private readonly VtorproektContext _db;
 
         public BalesController(VtorproektContext context)
         {
-            _context = context;
+            _db = context;
         }
 
         // GET: Bales
         public async Task<IActionResult> Index()
         {
-            var vtorproektContext = _context.Bales.Include(b => b.Employee).Include(b => b.Material);
+            var vtorproektContext = _db.Bales.Include(b => b.Employee).Include(b => b.Material);
             return View(await vtorproektContext.ToListAsync());
         }
 
         // GET: Bales/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Bales == null)
+            if (id == null || _db.Bales == null)
             {
                 return NotFound();
             }
 
-            var bale = await _context.Bales
+            var bale = await _db.Bales
                 .Include(b => b.Employee)
                 .Include(b => b.Material)
                 .FirstOrDefaultAsync(m => m.BaleId == id);
@@ -47,12 +47,22 @@ namespace Vtorproekt.Controllers
         }
 
         // GET: Bales/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["Employee"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeId");
+        //    ViewData["Material"] = new SelectList(_db.Materials, "MaterialId", "MaterialId");
+        //    return View();
+        //}
+
         public IActionResult Create()
         {
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
-            ViewData["MaterialId"] = new SelectList(_context.Materials, "MaterialId", "MaterialId");
+            //ViewBag.Employee = new SelectList(_db.Employees, "EmployeeId", "FullName");
+            //ViewBag.Material = new SelectList(_db.Materials, "MaterialId", "Name");
+            ViewBag.Employee = _db.Employees.ToList();
+            ViewBag.Material = _db.Materials.ToList();
             return View();
         }
+
 
         // POST: Bales/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -63,30 +73,30 @@ namespace Vtorproekt.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bale);
-                await _context.SaveChangesAsync();
+                _db.Add(bale);
+                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
-            ViewData["MaterialId"] = new SelectList(_context.Materials, "MaterialId", "MaterialId", bale.MaterialId);
+            ViewData["EmployeeId"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
+            ViewData["MaterialId"] = new SelectList(_db.Materials, "MaterialId", "MaterialId", bale.MaterialId);
             return View(bale);
         }
 
         // GET: Bales/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Bales == null)
+            if (id == null || _db.Bales == null)
             {
                 return NotFound();
             }
 
-            var bale = await _context.Bales.FindAsync(id);
+            var bale = await _db.Bales.FindAsync(id);
             if (bale == null)
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
-            ViewData["MaterialId"] = new SelectList(_context.Materials, "MaterialId", "MaterialId", bale.MaterialId);
+            ViewData["EmployeeId"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
+            ViewData["MaterialId"] = new SelectList(_db.Materials, "MaterialId", "MaterialId", bale.MaterialId);
             return View(bale);
         }
 
@@ -106,8 +116,8 @@ namespace Vtorproekt.Controllers
             {
                 try
                 {
-                    _context.Update(bale);
-                    await _context.SaveChangesAsync();
+                    _db.Update(bale);
+                    await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -122,20 +132,20 @@ namespace Vtorproekt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
-            ViewData["MaterialId"] = new SelectList(_context.Materials, "MaterialId", "MaterialId", bale.MaterialId);
+            ViewData["EmployeeId"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
+            ViewData["MaterialId"] = new SelectList(_db.Materials, "MaterialId", "MaterialId", bale.MaterialId);
             return View(bale);
         }
 
         // GET: Bales/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Bales == null)
+            if (id == null || _db.Bales == null)
             {
                 return NotFound();
             }
 
-            var bale = await _context.Bales
+            var bale = await _db.Bales
                 .Include(b => b.Employee)
                 .Include(b => b.Material)
                 .FirstOrDefaultAsync(m => m.BaleId == id);
@@ -152,23 +162,23 @@ namespace Vtorproekt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Bales == null)
+            if (_db.Bales == null)
             {
                 return Problem("Entity set 'VtorproektContext.Bales'  is null.");
             }
-            var bale = await _context.Bales.FindAsync(id);
+            var bale = await _db.Bales.FindAsync(id);
             if (bale != null)
             {
-                _context.Bales.Remove(bale);
+                _db.Bales.Remove(bale);
             }
             
-            await _context.SaveChangesAsync();
+            await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BaleExists(int id)
         {
-          return (_context.Bales?.Any(e => e.BaleId == id)).GetValueOrDefault();
+          return (_db.Bales?.Any(e => e.BaleId == id)).GetValueOrDefault();
         }
     }
 }

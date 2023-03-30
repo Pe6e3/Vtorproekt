@@ -5,6 +5,8 @@ namespace Vtorproekt.Models
 {
     public class Bale
     {
+        [Display (Name="Номер тюка/бэга")]
+        [DisplayFormat(DataFormatString = "{0:0000}")]
         [Key] public int BaleId { get; set; }
 
 

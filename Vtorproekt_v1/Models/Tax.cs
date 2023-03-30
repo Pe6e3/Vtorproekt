@@ -8,7 +8,7 @@ namespace Vtorproekt.Models
         [Key]
         public int TaxId { get; set; }
 
-        [DisplayFormat(DataFormatString = "{dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateTax { get; set; }
 
         public double TaxValue { get; set; }
