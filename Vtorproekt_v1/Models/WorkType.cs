@@ -5,6 +5,6 @@ namespace Vtorproekt.Models
     public class WorkType
     {
         [Key] public int WorkTypeId { get; set; }
-        public string WorkType { get; set; } =string.Empty;
+        public string WorkTypeName { get; set; } =string.Empty;
     }
 }
