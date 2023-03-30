@@ -1,4 +1,5 @@
-﻿@model Vtorproekt.Models.Production
+﻿@using Vtorproekt.Models;
+@model Vtorproekt.Models.Production
 
 @{
     ViewData["Title"] = "Create";
@@ -12,13 +13,28 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="WorkTypeId" class="control-label"></label>
-                <select asp-for="WorkTypeId" class ="form-control" asp-items="ViewBag.WorkTypeId"></select>
+                <label asp-for="WorkTypeId" class="control-label">@Html.DisplayNameFor(model=>model.WorkType.WorkTypeId)</label>
+                <select asp-for="WorkTypeId" class="form-control">
+                    @foreach (WorkType workType in ViewBag.WorkType)
+                    {
+                        <option value=@workType.WorkTypeId>@workType.WorkTypeName</option>
+                    }
+
+                </select>
             </div>
+
             <div class="form-group">
-                <label asp-for="BaleId" class="control-label"></label>
-                <input asp-for="BaleId" class="form-control" />
+                <label asp-for="BaleId" class="control-label">@Html.DisplayNameFor(model=>model.BaleId)</label>
+                <select asp-for="BaleId" class="form-control">
+                    @foreach (Bale bale in ViewBag.Bale)
+                    {
+                        <option value="@bale.BaleId"> @bale.BaleId - @bale.Material.MaterialName (@bale.Employee.EmployeeName)</option>
+                    }
+
+                </select>
+
                 <span asp-validation-for="BaleId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -26,20 +42,44 @@
                 <input asp-for="Weight" class="form-control" />
                 <span asp-validation-for="Weight" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="StorageId" class="control-label"></label>
-                <select asp-for="StorageId" class ="form-control" asp-items="ViewBag.StorageId"></select>
+                <label asp-for="StorageId" class="control-label">@Html.DisplayNameFor(model=>model.Storage.StorageId) </label>
+                <select asp-for="StorageId" class="form-control">
+
+                    @foreach (Storage storage in ViewBag.Storage)
+                    {
+                        <option value="@storage.StorageId">@storage.StorageAdress</option>
+                    }
+                </select>
+
             </div>
             <div class="form-group">
-                <label asp-for="ProduceDate" class="control-label"></label>
-                <input asp-for="ProduceDate" class="form-control" />
+                <label asp-for="ProduceDate" class="control-label">@Html.DisplayNameFor(model=>model.ProduceDate)</label>
+                <input type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" asp-for="ProduceDate" class="form-control" />
+
+
+
+
                 <span asp-validation-for="ProduceDate" class="text-danger"></span>
             </div>
+
+
+
             <div class="form-group">
                 <label asp-for="TaxId" class="control-label"></label>
-                <input asp-for="TaxId" class="form-control" />
+                <select asp-for="TaxId" class="form-control">
+
+                    @foreach (Tax tax in ViewBag.Tax)
+                    {
+                        <option value="@tax.TaxId">@tax.TaxName</option>
+                    }
+                </select>
+
+            
                 <span asp-validation-for="TaxId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -52,5 +92,19 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
+<style>
+    .form-group {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .control-label {
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+</style>

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Vtorproekt.Models.Production>
+﻿@using Vtorproekt.Models;
+@model IEnumerable<Vtorproekt.Models.Production>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.WorkType)
+                @Html.DisplayNameFor(model => model.BaleId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BaleId)
+                @Html.DisplayNameFor(model => model.WorkTypeId)
+            </th>
+            <th>
+                Кто произвел
+            </th>
+            <th>
+                Что произвел
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Weight)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Storage)
+                @Html.DisplayNameFor(model => model.StorageId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProduceDate)
@@ -34,32 +41,74 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkType.WorkTypeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BaleId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Storage.StorageId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProduceDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaxId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductionId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaleId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkType.WorkTypeName)
+                </td>
+                <td>
+                    @foreach (Bale bale in ViewBag.Bale)
+                    {
+                        if (bale.BaleId == item.BaleId)
+                        {
+                            @bale.Employee.EmployeeName
+                        }
+                    }
+
+                </td>
+                <td>
+                    @foreach (Bale bale in ViewBag.Bale)
+                    {
+                        if (bale.BaleId == item.BaleId)
+                        {
+                            @bale.Material.MaterialName
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Storage.StorageAdress)
+                </td>
+                <td>
+                    @item.ProduceDate)
+                </td>
+                <td>
+                    @foreach (Tax tax in ViewBag.Tax)
+                    {
+                        if (tax.TaxId == item.TaxId)
+                        {
+                            @tax.TaxName
+                            ;
+                            <br />
+                            @tax.TaxValue
+                            ;
+                            <slot>коп. </slot>
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductionId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProductionId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProductionId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<style>
+
+    table {
+        text-align: center;
+    }
+
+        table td,tr {
+            vertical-align: middle;
+        }
+</style>

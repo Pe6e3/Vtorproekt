@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vtorproekt.Data;
 
@@ -11,9 +12,11 @@ using Vtorproekt.Data;
 namespace Vtorproekt.Migrations
 {
     [DbContext(typeof(VtorproektContext))]
-    partial class VtorproektContextModelSnapshot : ModelSnapshot
+    [Migration("20230330155601_Fixed spelling error in Storage adress")]
+    partial class FixedspellingerrorinStorageadress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,9 +179,6 @@ namespace Vtorproekt.Migrations
 
                     b.Property<double>("Multi3")
                         .HasColumnType("float");
-
-                    b.Property<string>("TaxName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("TaxValue")
                         .HasColumnType("float");

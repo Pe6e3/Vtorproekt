@@ -1,23 +1,32 @@
 ﻿@model Vtorproekt.Models.Tax
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Изменить тариф";
 }
 
-<h1>Edit</h1>
+<h1>Изменить тариф</h1>
 
-<h4>Tax</h4>
+<h4>@Model.TaxName</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TaxId" />
+            
             <div class="form-group">
                 <label asp-for="DateTax" class="control-label"></label>
-                <input asp-for="DateTax" class="form-control" />
+                <input type="datetime-local" value="@ViewBag.TaxDateValue.ToString("yyyy-MM-ddTHH:mm")" asp-for="DateTax" class="form-control" />
                 <span asp-validation-for="DateTax" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="TaxName" class="control-label"></label>
+                <input asp-for="TaxName" class="form-control" />
+
+                <span asp-validation-for="TaxName" class="text-danger"></span>
+            </div>
+            
             <div class="form-group">
                 <label asp-for="TaxValue" class="control-label"></label>
                 <input asp-for="TaxValue" class="form-control" />
@@ -67,3 +76,14 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<style>
+    .form-group {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .control-label {
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+</style>

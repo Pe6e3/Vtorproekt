@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vtorproekt.Data;
 
@@ -11,9 +12,11 @@ using Vtorproekt.Data;
 namespace Vtorproekt.Migrations
 {
     [DbContext(typeof(VtorproektContext))]
-    partial class VtorproektContextModelSnapshot : ModelSnapshot
+    [Migration("20230330171826_Added column in Tax model (name of Tax)")]
+    partial class AddedcolumninTaxmodelnameofTax
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

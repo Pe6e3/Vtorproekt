@@ -12,30 +12,30 @@ namespace Vtorproekt.Controllers
 {
     public class TaxesController : Controller
     {
-        private readonly VtorproektContext _context;
+        private readonly VtorproektContext _db;
 
         public TaxesController(VtorproektContext context)
         {
-            _context = context;
+            _db = context;
         }
 
         // GET: Taxes
         public async Task<IActionResult> Index()
         {
-              return _context.Taxes != null ? 
-                          View(await _context.Taxes.ToListAsync()) :
+              return _db.Taxes != null ? 
+                          View(await _db.Taxes.ToListAsync()) :
                           Problem("Entity set 'VtorproektContext.Taxes'  is null.");
         }
 
         // GET: Taxes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Taxes == null)
+            if (id == null || _db.Taxes == null)
             {
                 return NotFound();
             }
 
-            var tax = await _context.Taxes
+            var tax = await _db.Taxes
                 .FirstOrDefaultAsync(m => m.TaxId == id);
             if (tax == null)
             {
@@ -60,8 +60,8 @@ namespace Vtorproekt.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tax);
-                await _context.SaveChangesAsync();
+                _db.Add(tax);
+                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(tax);
@@ -70,16 +70,17 @@ namespace Vtorproekt.Controllers
         // GET: Taxes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Taxes == null)
+            if (id == null || _db.Taxes == null)
             {
                 return NotFound();
             }
 
-            var tax = await _context.Taxes.FindAsync(id);
+            var tax = await _db.Taxes.FindAsync(id);
             if (tax == null)
             {
                 return NotFound();
             }
+            ViewBag.TaxDateValue = tax.DateTax;
             return View(tax);
         }
 
@@ -88,7 +89,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaxId,DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
+        public async Task<IActionResult> Edit(int id, [Bind("TaxId,TaxName, DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
         {
             if (id != tax.TaxId)
             {
@@ -99,8 +100,8 @@ namespace Vtorproekt.Controllers
             {
                 try
                 {
-                    _context.Update(tax);
-                    await _context.SaveChangesAsync();
+                    _db.Update(tax);
+                    await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,12 +122,12 @@ namespace Vtorproekt.Controllers
         // GET: Taxes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Taxes == null)
+            if (id == null || _db.Taxes == null)
             {
                 return NotFound();
             }
 
-            var tax = await _context.Taxes
+            var tax = await _db.Taxes
                 .FirstOrDefaultAsync(m => m.TaxId == id);
             if (tax == null)
             {
@@ -141,23 +142,23 @@ namespace Vtorproekt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Taxes == null)
+            if (_db.Taxes == null)
             {
                 return Problem("Entity set 'VtorproektContext.Taxes'  is null.");
             }
-            var tax = await _context.Taxes.FindAsync(id);
+            var tax = await _db.Taxes.FindAsync(id);
             if (tax != null)
             {
-                _context.Taxes.Remove(tax);
+                _db.Taxes.Remove(tax);
             }
             
-            await _context.SaveChangesAsync();
+            await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TaxExists(int id)
         {
-          return (_context.Taxes?.Any(e => e.TaxId == id)).GetValueOrDefault();
+          return (_db.Taxes?.Any(e => e.TaxId == id)).GetValueOrDefault();
         }
     }
 }
