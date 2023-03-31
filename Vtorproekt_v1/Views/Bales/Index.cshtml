@@ -1,24 +1,38 @@
-﻿@model IEnumerable<Vtorproekt.Models.Bale>
+﻿@using Vtorproekt.Models;
+@model IEnumerable<Vtorproekt.Models.Bale>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Реестр всех тюков / бэгов</h1>
 <p>
-    <a asp-action="Create">Create New</a>
+    Сотруднику выдаются карточки тюков. <br />
+    Каждый тюк именной.<br />
+    После завершения прессования тюка сотрудник крепит на него карточку
 </p>
-<table class="table">
+<p>
+    <b> Добавить</b>
+    <a asp-action="Create"><img src="img/ico/add.png" /></a>
+</p>
+<table class="table text-center">
     <thead>
         <tr>
-            <th>
+            <th class="col-md-1">
                 @Html.DisplayNameFor(model => model.BaleId)
             </th>
-            <th>
+            <th class="col-md-5">
                 @Html.DisplayNameFor(model => model.Employee.EmployeeName)
             </th>
-            <th>
+            <th class="col-md-2">
                 @Html.DisplayNameFor(model => model.Material.MaterialName)
+            </th>
+            <th class="col-md-2">
+                Вес тюка/бэга
+            </th>
+
+            <th class="col-md-2">
+                Действия с тюком
             </th>
             <th></th>
         </tr>
@@ -28,7 +42,7 @@
         {
             <tr>
                 <th>
-                   @item.BaleId
+                    @item.BaleId
 
                 </th>
                 <td>
@@ -37,12 +51,31 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Material.MaterialName)
                 </td>
+                <th class="col-md-2">
+                    @foreach (Production production in ViewBag.Production)
+                    {
+                        if (production.BaleId == item.BaleId)
+                        {
+                            @production.Weight
+                        }
+                    }
+
+                </th>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.BaleId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.BaleId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.BaleId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.BaleId"><img src="img/ico/edit.png" /></a> |
+                    <a asp-action="Details" asp-route-id="@item.BaleId"><img src="img/ico/info.png" /></a> |
+                    <a asp-action="Delete" asp-route-id="@item.BaleId"><img src="img/ico/delete.png" /></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<style>
+
+    img {
+        height: calc(25px + 0.5vw);
+        width: auto;
+    }
+
+</style>

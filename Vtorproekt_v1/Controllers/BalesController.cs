@@ -23,6 +23,7 @@ namespace Vtorproekt.Controllers
         public async Task<IActionResult> Index()
         {
             var vtorproektContext = _db.Bales.Include(b => b.Employee).Include(b => b.Material);
+            ViewBag.Production = _db.Productions.ToList();
             return View(await vtorproektContext.ToListAsync());
         }
 
