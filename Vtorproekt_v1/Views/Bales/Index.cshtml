@@ -21,7 +21,7 @@
             <th class="col-md-1">
                 @Html.DisplayNameFor(model => model.BaleId)
             </th>
-            <th class="col-md-5">
+            <th class="col-md-4">
                 @Html.DisplayNameFor(model => model.Employee.EmployeeName)
             </th>
             <th class="col-md-2">
@@ -31,7 +31,7 @@
                 Вес тюка/бэга
             </th>
 
-            <th class="col-md-2">
+            <th class="col-md-3">
                 Действия с тюком
             </th>
             <th></th>
@@ -62,8 +62,8 @@
 
                 </th>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.BaleId"><img src="img/ico/edit.png" /></a> |
-                    <a asp-action="Details" asp-route-id="@item.BaleId"><img src="img/ico/info.png" /></a> |
+                    <a asp-action="Edit" asp-route-id="@item.BaleId"><img src="img/ico/edit.png" /></a> 
+                    <a asp-action="Details" asp-route-id="@item.BaleId"><img src="img/ico/info.png" /></a> 
                     <a asp-action="Delete" asp-route-id="@item.BaleId"><img src="img/ico/delete.png" /></a>
                 </td>
             </tr>
@@ -74,8 +74,13 @@
 <style>
 
     img {
-        height: calc(25px + 0.5vw);
+        height: calc(15px + 1vw);
+        margin-right:5px;
         width: auto;
+    }
+
+    .table {
+        width: 70%;
     }
 
 </style>

@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<Vtorproekt.Models.Employee>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Сотрудники";
 }
 
-<h1>Index</h1>
+<h2>Сотрудники</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <b> Добавить</b>
+    <a asp-action="Create"><img src="img/ico/add.png" /></a>
 </p>
-<table class="table">
+<table class="table text-center">
     <thead>
         <tr>
             <th>
@@ -19,17 +20,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmployeeId"><img src="img/ico/edit.png" /></a> 
+                    <a asp-action="Details" asp-route-id="@item.EmployeeId"><img src="img/ico/info.png" /></a> 
+                    <a asp-action="Delete" asp-route-id="@item.EmployeeId"><img src="img/ico/delete.png" /></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<style>
+
+    img {
+        height: calc(15px + 1vw);
+        margin-right: 5px;
+        width: auto;
+    }
+
+    .table {
+        width: 50%;
+    }
+
+</style>
