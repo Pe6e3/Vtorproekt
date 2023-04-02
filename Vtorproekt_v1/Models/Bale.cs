@@ -15,9 +15,12 @@ namespace Vtorproekt.Models
         public virtual Employee? Employee { get; set; }
 
 
+
         [ForeignKey("MaterialId")]
         public int? MaterialId { get; set; }
         public virtual Material? Material { get; set; }
+
+        public bool isReady { get; set; } = false;
 
     }
 }

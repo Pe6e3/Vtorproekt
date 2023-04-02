@@ -16,6 +16,8 @@
 
             <div class="form-group">
                 <label asp-for="WorkTypeId" class="control-label">@Html.DisplayNameFor(model=>model.WorkType.WorkTypeId)</label>
+              
+                
                 <select asp-for="WorkTypeId" class="form-control">
                     @foreach (WorkType workType in ViewBag.WorkType)
                     {
@@ -23,6 +25,8 @@
                     }
 
                 </select>
+
+
             </div>
 
             <div class="form-group">

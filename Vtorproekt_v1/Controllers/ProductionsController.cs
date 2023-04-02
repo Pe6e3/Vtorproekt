@@ -60,6 +60,8 @@ namespace Vtorproekt.Controllers
             ViewBag.Tax = _db.Taxes.ToList();
             ViewBag.Storager = _db.Employees.ToList();
             ViewBag.Material = _db.Materials.ToList();
+         
+
 
 
             return View();
