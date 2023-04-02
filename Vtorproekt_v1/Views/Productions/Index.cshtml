@@ -77,7 +77,7 @@
                     @Html.DisplayFor(modelItem => item.Storage.StorageAdress)
                 </td>
                 <td>
-                    @item.ProduceDate)
+                    @item.ProduceDate
                 </td>
                 <td>
                     @foreach (Tax tax in ViewBag.Tax)
@@ -96,8 +96,8 @@
                 <td>
 
                     <a asp-action="Edit" asp-route-id="@item.ProductionId"><img src="img/ico/edit.png" /></a>
-                    <a asp-action="Details" asp-route-id="@item.ProductionId"><img src="img/ico/info.png" /></a>
                     <a asp-action="Delete" asp-route-id="@item.ProductionId"><img src="img/ico/delete.png" /></a>
+               @*     <a asp-action="Details" asp-route-id="@item.ProductionId"><img src="img/ico/info.png" /></a>*@
                 </td>
             </tr>
         }

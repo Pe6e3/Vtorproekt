@@ -61,6 +61,7 @@ namespace Vtorproekt.Controllers
             ViewBag.Storager = _db.Employees.ToList();
             ViewBag.Material = _db.Materials.ToList();
 
+            ViewBag.BaleEmpty = _db.Bales.Where(bale=>bale.isReady==false).ToList();
 
 
 
@@ -88,14 +89,23 @@ namespace Vtorproekt.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StorageId"] = new SelectList(_db.Storages, "StorageId", "StorageId", production.StorageId);
-            ViewData["WorkTypeId"] = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeId", production.WorkTypeId);
+            ViewData["Storage"] = new SelectList(_db.Storages, "StorageId", "StorageName", production.StorageId);
+            ViewData["WorkType"] = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName", production.WorkTypeId);
             return View(production);
         }
 
         // GET: Productions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.Storage = _db.Storages.ToList();
+            ViewBag.WorkType = _db.WorkTypes.ToList();
+            ViewBag.Bale = _db.Bales.ToList();
+            ViewBag.Tax = _db.Taxes.ToList();
+            ViewBag.Storager = _db.Employees.ToList();
+            ViewBag.Material = _db.Materials.ToList();
+            ViewBag.BaleEmpty = _db.Bales.Where(bale => bale.isReady == false).ToList();
+
+
             if (id == null || _db.Productions == null)
             {
                 return NotFound();
@@ -106,8 +116,6 @@ namespace Vtorproekt.Controllers
             {
                 return NotFound();
             }
-            ViewData["StorageId"] = new SelectList(_db.Storages, "StorageId", "StorageId", production.StorageId);
-            ViewData["WorkTypeId"] = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeId", production.WorkTypeId);
             return View(production);
         }
 

@@ -35,7 +35,7 @@ namespace Vtorproekt.Models
 
 
         [Display (Name ="Дата и время производства")]
-        [DisplayFormat(DataFormatString = "{hh:mm dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]  С этой строкой ошибка в Edit
         public DateTime ProduceDate { get; set; }
 
 

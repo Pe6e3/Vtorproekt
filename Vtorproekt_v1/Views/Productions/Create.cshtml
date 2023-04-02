@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label asp-for="BaleId" class="control-label">@Html.DisplayNameFor(model=>model.BaleId)</label>
                 <select asp-for="BaleId" class="form-control">
-                    @foreach (Bale bale in ViewBag.Bale)
+                    @foreach (Bale bale in ViewBag.BaleEmpty)
                     {
                         <option value="@bale.BaleId"> @bale.BaleId - @bale.Material.MaterialName (@bale.Employee.EmployeeName)</option>
                     }
@@ -61,10 +61,6 @@
             <div class="form-group">
                 <label asp-for="ProduceDate" class="control-label">@Html.DisplayNameFor(model=>model.ProduceDate)</label>
                 <input type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" asp-for="ProduceDate" class="form-control" />
-
-
-
-
                 <span asp-validation-for="ProduceDate" class="text-danger"></span>
             </div>
 
