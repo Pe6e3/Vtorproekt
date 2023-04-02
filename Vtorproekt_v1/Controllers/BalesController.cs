@@ -70,7 +70,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BaleId,EmployeeId,MaterialId")] Bale bale)
+        public async Task<IActionResult> Create([Bind("BaleId,EmployeeId,MaterialId,isReady")] Bale bale)
         {
             if (ModelState.IsValid)
             {
@@ -78,8 +78,8 @@ namespace Vtorproekt.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
-            ViewData["MaterialId"] = new SelectList(_db.Materials, "MaterialId", "MaterialId", bale.MaterialId);
+            ViewData["Employee"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeName", bale.EmployeeId);
+            ViewData["Material"] = new SelectList(_db.Materials, "MaterialId", "MaterialName", bale.MaterialId);
             return View(bale);
         }
 
@@ -96,8 +96,8 @@ namespace Vtorproekt.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeId", bale.EmployeeId);
-            ViewData["MaterialId"] = new SelectList(_db.Materials, "MaterialId", "MaterialId", bale.MaterialId);
+            ViewData["Employee"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeName", bale.EmployeeId);
+            ViewData["Material"] = new SelectList(_db.Materials, "MaterialId", "MaterialName", bale.MaterialId);
             return View(bale);
         }
 
@@ -106,7 +106,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BaleId,EmployeeId,MaterialId")] Bale bale)
+        public async Task<IActionResult> Edit(int id, [Bind("BaleId,EmployeeId,MaterialId,isReady")] Bale bale)
         {
             if (id != bale.BaleId)
             {

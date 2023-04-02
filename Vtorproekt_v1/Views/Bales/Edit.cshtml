@@ -1,12 +1,12 @@
 ﻿@model Vtorproekt.Models.Bale
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редактирование тюка";
 }
 
-<h1>Edit</h1>
+<h1>Редактирование </h1>
 
-<h4>Bale</h4>
+<h4>тюка</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,25 +15,165 @@
             <input type="hidden" asp-for="BaleId" />
             <div class="form-group">
                 <label asp-for="EmployeeId" class="control-label"></label>
-                <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.Employee"></select>
                 <span asp-validation-for="EmployeeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MaterialId" class="control-label"></label>
-                <select asp-for="MaterialId" class="form-control" asp-items="ViewBag.MaterialId"></select>
+                <select asp-for="MaterialId" class="form-control" asp-items="ViewBag.Material"></select>
                 <span asp-validation-for="MaterialId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="checkbox" asp-for="isReady">
+                <label asp-for="isReady" data-onlabel="готов" data-offlabel="не готов" class="lb1">&nbsp</label>
+
             </div>
+
+
+            <div class="row d-flex ">
+
+                <div class="col" >
+                    <a asp-action="Index">
+                        <svg class="arrow-left-1" viewbox="0 0 60 100"><path d="M 50,0 L 60,10 L 20,50 L 60,90 L 50,100 L 0,50 Z" /></svg>
+                    </a>
+                </div>
+
+                <div class="col">
+
+                    <div class="form-group">
+                        <img type="submit" value="Save" src="~/img/ico/save.png" style="height:80px; width:auto;margin-top:20px" />
+                    </div>
+                </div>
+            </div>
+
         </form>
     </div>
 </div>
+<hr />
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
+
+
+<style>
+
+    /*Стрелка*/
+    .arrow-left-1,
+    .arrow-right-1,
+    .arrow-top-1,
+    .arrow-bottom-1 {
+        margin: 20px 8px;
+        border-radius: 50%;
+        border: 2px solid #337AB7;
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+        box-shadow: 0 0 12px 4px #BFE2FF;
+        background: radial-gradient(#fff, #BFE2FF);
+        cursor: pointer;
+    }
+
+        .arrow-left-1 path,
+        .arrow-right-1 path,
+        .arrow-top-1 path,
+        .arrow-bottom-1 path {
+            fill: rgba(191, 226, 255, 0.6);
+            stroke-width: 2;
+            stroke: #337AB7;
+            transition: fill 0.5s ease-out;
+        }
+
+    .arrow-right-1 {
+        transform: rotate(180deg);
+    }
+
+    .arrow-top-1 {
+        transform: rotate(90deg);
+    }
+
+    .arrow-bottom-1 {
+        transform: rotate(270deg);
+    }
+
+        .arrow-left-1:hover path,
+        .arrow-right-1:hover path,
+        .arrow-top-1:hover path,
+        .arrow-bottom-1:hover path {
+            fill: #337AB7;
+        }
+    /*Стрелка*/
+
+    .lb1 {
+        margin: 2em;
+    }
+
+    #isReady {
+        display: none;
+    }
+
+        #isReady + .lb1, #isReady + .lb1::before, #isReady + .lb1::after {
+            transition: all .3s;
+        }
+
+        #isReady + .lb1 {
+            display: inline-block;
+            position: relative;
+            width: 140px;
+            height: 60px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+            #isReady + .lb1::before {
+                display: block;
+                content: attr(data-offlabel);
+                position: absolute;
+                top: 15px;
+                right: 6px;
+                color: black;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 17px;
+            }
+
+            #isReady + .lb1::after {
+                border-radius: 50%;
+                content: '';
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                width: 54px;
+                height: 54px;
+                background-color: white;
+            }
+
+        #isReady:checked + .lb1::before {
+            content: attr(data-onlabel);
+            left: 14px;
+            right: auto;
+            color: #fff;
+        }
+
+        #isReady:checked + .lb1::after {
+            left: 83px;
+            background-color: #f7f7f7;
+        }
+
+        #isReady + .lb1 {
+            background-color: #ccc;
+        }
+
+        #isReady:checked + .lb1 {
+            background-color: green;
+        }
+
+            #isReady:checked + .lb1::before {
+                color: #fff;
+            }
+</style>

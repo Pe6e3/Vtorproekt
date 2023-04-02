@@ -60,7 +60,7 @@ namespace Vtorproekt.Controllers
             ViewBag.Tax = _db.Taxes.ToList();
             ViewBag.Storager = _db.Employees.ToList();
             ViewBag.Material = _db.Materials.ToList();
-         
+
 
 
 
@@ -76,6 +76,14 @@ namespace Vtorproekt.Controllers
         {
             if (ModelState.IsValid)
             {
+                Bale bale = _db.Bales.Where(newBale => newBale.BaleId == production.BaleId).FirstOrDefault();
+                if (bale != null)
+                {
+                    bale.isReady = true;
+                    _db.Update(bale);
+                }
+
+
                 _db.Add(production);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
