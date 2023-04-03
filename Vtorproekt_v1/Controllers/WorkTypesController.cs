@@ -20,12 +20,26 @@ namespace Vtorproekt.Controllers
         }
 
         // GET: WorkTypes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-              return _db.WorkTypes != null ? 
-                          View(await _db.WorkTypes.ToListAsync()) :
-                          Problem("Entity set 'VtorproektContext.WorkTypes'  is null.");
+            ViewData["SortOrder"] = sortOrder;
+
+            var workTypes = from wt in _db.WorkTypes
+                            select wt;
+
+            switch (sortOrder)
+            {
+                case "WorkTypeName_desc":
+                    workTypes = workTypes.OrderByDescending(wt => wt.WorkTypeName);
+                    break;
+                default:
+                    workTypes = workTypes.OrderBy(wt => wt.WorkTypeName);
+                    break;
+            }
+
+            return View(await workTypes.AsNoTracking().ToListAsync());
         }
+
 
         // GET: WorkTypes/Details/5
         public async Task<IActionResult> Details(int? id)

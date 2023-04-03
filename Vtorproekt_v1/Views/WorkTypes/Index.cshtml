@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.WorkTypeName)
+                <a asp-action="Index" asp-route-sortOrder="@("WorkTypeName_asc".Equals(ViewData["SortOrder"]) ? "WorkTypeName_desc" : "WorkTypeName_asc")">Вид работы</a>
             </th>
             <th>Действия с видом работы</th>
         </tr>
