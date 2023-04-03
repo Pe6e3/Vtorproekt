@@ -48,6 +48,8 @@ namespace Vtorproekt.Controllers
         // GET: Taxes/Create
         public IActionResult Create()
         {
+            ViewBag.WorkTypes = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName");
+
             return View();
         }
 
@@ -56,7 +58,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TaxId,DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
+        public async Task<IActionResult> Create([Bind("TaxId,WorkTypeId,DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +91,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaxId,TaxName, DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
+        public async Task<IActionResult> Edit(int id, [Bind("TaxId,WorkTypeId, DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
         {
             if (id != tax.TaxId)
             {

@@ -18,12 +18,14 @@
                 <span asp-validation-for="DateTax" class="text-danger"></span>
             </div>
 
-            <div class=" form-group">
-                <label asp-for="WorkTypeId" class="control-label">@Html.DisplayNameFor(model=>model.WorkTypeId)</label>
-                <input asp-for="WorkTypeId" class="form-control" />
+            <div class="form-group">
+                <label asp-for="WorkTypeId" class="control-label"></label>
+                <select asp-for="WorkTypeId" class="form-control" asp-items="@ViewBag.WorkTypes">
+                    <option value="">Выберите тип работы</option>
+                </select>
                 <span asp-validation-for="WorkTypeId" class="text-danger"></span>
-
             </div>
+
 
             <div class="form-group">
                 <label asp-for="TaxValue" class="control-label"></label>
