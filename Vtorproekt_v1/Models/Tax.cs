@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vtorproekt.Models
 {
@@ -9,7 +10,8 @@ namespace Vtorproekt.Models
         public int TaxId { get; set; }
 
         [Display(Name = "На какой вид работ данный тариф")]
-        public string? TaxName { get; set; }
+        [ForeignKey(nameof(WorkType.WorkTypeId))]
+        public int WorkTypeId { get; set; }
 
         [Display(Name = "Дата ввода тарифа")]
         [DisplayFormat(DataFormatString = "yyyy-MM-ddTHH:mm", ApplyFormatInEditMode = true)]
