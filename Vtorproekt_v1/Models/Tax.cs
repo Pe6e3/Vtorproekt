@@ -10,7 +10,7 @@ namespace Vtorproekt.Models
         public int TaxId { get; set; }
 
         [Display(Name = "На какой вид работ данный тариф")]
-        [ForeignKey(nameof(WorkType.WorkTypeId))]
+        [ForeignKey(nameof(WorkTypeId))]
         public int WorkTypeId { get; set; }
 
         [Display(Name = "Дата ввода тарифа")]
@@ -40,6 +40,7 @@ namespace Vtorproekt.Models
         public double Multi3 { get; set; }
 
         public virtual ICollection<Production>? Productions { get; set; }
+        public virtual WorkType? WorkType { get; set; }
         
     }
 }

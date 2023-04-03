@@ -16,6 +16,15 @@
         <dd class = "col-sm-10">
             @Model.DateTax
         </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WorkTypeId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WorkType.WorkTypeName)
+        </dd>
+
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TaxValue)
         </dt>

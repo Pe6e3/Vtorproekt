@@ -23,9 +23,9 @@ namespace Vtorproekt.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.WorkTypes = _db.WorkTypes.ToList();
-              return _db.Taxes != null ? 
-                          View(await _db.Taxes.ToListAsync()) :
-                          Problem("Entity set 'VtorproektContext.Taxes'  is null.");
+            return _db.Taxes != null ?
+                        View(await _db.Taxes.ToListAsync()) :
+                        Problem("Entity set 'VtorproektContext.Taxes'  is null.");
         }
 
         // GET: Taxes/Details/5
@@ -37,6 +37,7 @@ namespace Vtorproekt.Controllers
             }
 
             var tax = await _db.Taxes
+                .Include(tax => tax.WorkType)
                 .FirstOrDefaultAsync(m => m.TaxId == id);
             if (tax == null)
             {
@@ -79,7 +80,9 @@ namespace Vtorproekt.Controllers
                 return NotFound();
             }
 
-            var tax = await _db.Taxes.FindAsync(id);
+            var tax = await _db.Taxes
+                .Include(tax => tax.WorkType)
+                .FirstOrDefaultAsync(model => model.TaxId == id);
             if (tax == null)
             {
                 return NotFound();
@@ -155,14 +158,14 @@ namespace Vtorproekt.Controllers
             {
                 _db.Taxes.Remove(tax);
             }
-            
+
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TaxExists(int id)
         {
-          return (_db.Taxes?.Any(e => e.TaxId == id)).GetValueOrDefault();
+            return (_db.Taxes?.Any(e => e.TaxId == id)).GetValueOrDefault();
         }
     }
 }
