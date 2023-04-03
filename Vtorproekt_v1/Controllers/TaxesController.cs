@@ -22,24 +22,25 @@ namespace Vtorproekt.Controllers
         // GET: Taxes
         public async Task<IActionResult> Index(string sortOrder)
         {
-            ViewBag.SortDate = sortOrder;
-            var SortDate = from sDate in _db.Taxes
-                                select sDate;
+            ViewBag.SortOrder = sortOrder;
+            var SortOrder = from sDate in _db.Taxes
+                            select sDate;
 
             switch (sortOrder)
             {
-                case "Date_desc": 
-                    SortDate = SortDate.OrderByDescending(tax => tax.DateTax ); 
-                    break;
-                default:        
-                    SortDate = SortDate.OrderBy(tax => tax.DateTax);
+                case "Date_desc": SortOrder = SortOrder.OrderByDescending(tax => tax.DateTax); break;
+                case "Date_asc": SortOrder = SortOrder.OrderBy(tax => tax.DateTax); break;
+                case "WorkType_desc": SortOrder = SortOrder.OrderByDescending(tax => tax.WorkType.WorkTypeName);  break;
+                case "WorkType_asc": SortOrder = SortOrder.OrderBy(tax => tax.WorkType.WorkTypeName); break;
+                default:
+
                     break;
             }
 
 
             ViewBag.WorkTypes = _db.WorkTypes.ToList();
             return _db.Taxes != null ?
-                        View(await SortDate.AsNoTracking().ToListAsync()) :
+                        View(await SortOrder.AsNoTracking().ToListAsync()) :
                         Problem("Entity set 'VtorproektContext.Taxes'  is null.");
         }
 

@@ -15,11 +15,17 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@("Date_asc".Equals(ViewBag.SortDate) ? "Date_desc" : "Date_asc")">@Html.DisplayNameFor(model => model.DateTax) </a>
-                
+                <a asp-action="Index" asp-route-sortOrder="@("Date_asc".Equals(ViewBag.SortOrder) ? "Date_desc" : "Date_asc")">
+                    @Html.DisplayNameFor(model => model.DateTax)
+
+                </a>
+
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WorkTypeId)
+                <a asp-action="Index" asp-route-sortOrder="@("WorkType_asc".Equals(ViewBag.SortOrder)?"WorkType_desc":"WorkType_asc" )">
+                    @Html.DisplayNameFor(model => model.WorkTypeId)
+                </a>
+
 
             </th>
             <th>
