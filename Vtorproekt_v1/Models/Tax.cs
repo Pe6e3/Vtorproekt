@@ -40,5 +40,6 @@ namespace Vtorproekt.Models
         public double Multi3 { get; set; }
 
         public virtual ICollection<Production>? Productions { get; set; }
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Vtorproekt.Models.Tax>
+﻿@using Vtorproekt.Models;
+@model IEnumerable<Vtorproekt.Models.Tax>
 
 @{
     ViewData["Title"] = "Тарифы";
@@ -18,6 +19,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.WorkTypeId)
+
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TaxValue)
@@ -51,7 +53,13 @@
                     @item.DateTax
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.WorkTypeId)
+                    @foreach (WorkType workType in ViewBag.WorkTypes)
+                    {
+                        if (workType.WorkTypeId == item.WorkTypeId)
+                        {
+                            @workType.WorkTypeName
+                        }
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TaxValue)
@@ -96,3 +104,4 @@
     }
 
 </style>
+

@@ -22,6 +22,7 @@ namespace Vtorproekt.Controllers
         // GET: Taxes
         public async Task<IActionResult> Index()
         {
+            ViewBag.WorkTypes = _db.WorkTypes.ToList();
               return _db.Taxes != null ? 
                           View(await _db.Taxes.ToListAsync()) :
                           Problem("Entity set 'VtorproektContext.Taxes'  is null.");
@@ -72,6 +73,7 @@ namespace Vtorproekt.Controllers
         // GET: Taxes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.WorkTypes = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName");
             if (id == null || _db.Taxes == null)
             {
                 return NotFound();
