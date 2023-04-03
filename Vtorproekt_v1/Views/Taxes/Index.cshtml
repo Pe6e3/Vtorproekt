@@ -15,7 +15,8 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DateTax)
+                <a asp-action="Index" asp-route-sortOrder="@("Date_asc".Equals(ViewBag.SortDate) ? "Date_desc" : "Date_asc")">@Html.DisplayNameFor(model => model.DateTax) </a>
+                
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.WorkTypeId)
@@ -84,7 +85,7 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.TaxId"><img src="img/ico/edit.png" /></a>
-                    <a asp-action="Details" asp-route-id="@item.TaxId"><img src="img/ico/info.png" /></a>
+                    @*<a asp-action="Details" asp-route-id="@item.TaxId"><img src="img/ico/info.png" /></a>*@
                     <a asp-action="Delete" asp-route-id="@item.TaxId"><img src="img/ico/delete.png" /></a>
                 </td>
             </tr>

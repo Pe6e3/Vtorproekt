@@ -20,11 +20,26 @@ namespace Vtorproekt.Controllers
         }
 
         // GET: Taxes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
+            ViewBag.SortDate = sortOrder;
+            var SortDate = from sDate in _db.Taxes
+                                select sDate;
+
+            switch (sortOrder)
+            {
+                case "Date_desc": 
+                    SortDate = SortDate.OrderByDescending(tax => tax.DateTax ); 
+                    break;
+                default:        
+                    SortDate = SortDate.OrderBy(tax => tax.DateTax);
+                    break;
+            }
+
+
             ViewBag.WorkTypes = _db.WorkTypes.ToList();
             return _db.Taxes != null ?
-                        View(await _db.Taxes.ToListAsync()) :
+                        View(await SortDate.AsNoTracking().ToListAsync()) :
                         Problem("Entity set 'VtorproektContext.Taxes'  is null.");
         }
 
