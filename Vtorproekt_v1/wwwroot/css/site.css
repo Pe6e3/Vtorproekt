@@ -2,18 +2,22 @@
     font-family: "My-Disket";
     src: url("/fonts/Disket-Mono-Bold.ttf") format("truetype");
 }
+
 @font-face {
     font-family: "My-Cat";
     src: url("/fonts/CAT-Arena.ttf") format("truetype");
 }
+
 @font-face {
     font-family: "My-Covid";
     src: url("/fonts/Covid19.ttf") format("truetype");
 }
+
 @font-face {
     font-family: "My-MultiRound";
     src: url("/fonts/MultiroundPro.otf") format("truetype");
 }
+
 @font-face {
     font-family: "My-W3";
     src: url("/fonts/w3-ip.ttf") format("truetype");
@@ -21,45 +25,62 @@
 
 body {
     font-family: My-Cat, sans-serif;
-    font-size:18px;
+    font-size: 18px;
 }
-h1 {
+
+h1, h2, h3, h4, h5 {
     font-family: My-W3, sans-serif;
+    margin: 20px 10px 20px 10px;
 }
+
 b {
     font-family: My-MultiRound, sans-serif;
 }
+
 th {
     font-family: My-MultiRound, sans-serif;
-    vertical-align:middle;
-}
-tr {
     vertical-align: middle;
 }
 
+tr {
+    vertical-align: middle;
+    transition: 1s;
+    background-color: #f6f8c8;
+}
+
+    tr:hover {
+        transition: 0.2s;
+        transform: scale(1.15);
+        background-color: #f2e1b4;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+    }
+
+ 
+
 
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-  background-color:antiquewhite;
+    margin-bottom: 60px;
+    background-color: antiquewhite;
+    padding-bottom: 80px;
 }
 
 
@@ -70,6 +91,7 @@ body {
     animation-play-state: paused;
     border-radius: 8px;
     transition: transform 0.6s ease;
+    box-shadow: 0 8px 11px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes shake {
@@ -94,7 +116,7 @@ header {
 }
 
 .navbar {
-    box-shadow: 0 8px 128px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.25);
 }
 
 .nav-item {
@@ -105,7 +127,7 @@ header {
 
 .nav-link {
     font-size: calc(6px + 1vw);
-    text-transform:uppercase;
+    text-transform: uppercase;
     margin-right: 90px;
     font-weight: bold;
     text-align: center;
@@ -117,3 +139,15 @@ header {
         transition: 0.1s;
         transform: scale(1.1);
     }
+
+
+
+footer {
+    background-color: #efe0cc;
+    opacity: 90%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.15);
+}

@@ -13,7 +13,7 @@
 
 
 </head>
-<body>
+<body class="pb-5">
     <header>
         <nav class="navbar fixed-top navbar-dark bg-dark  navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow ">
             <div class="container-fluid">
@@ -65,8 +65,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="border-top footer text-muted fixed-bottom">
+        <div class="container ">
             &copy; 2023 - Vtorproekt_v1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
@@ -87,6 +87,7 @@
     // Звук при наведении на любые ссылки, кроме ссылок Навбара
     const links = document.querySelectorAll('a');
     const navLinks = document.querySelectorAll('nav a');
+    const table = document.querySelectorAll('tr');
 
     links.forEach((link) => {
         if (!Array.from(navLinks).includes(link)) { // проверяем, что ссылка не находится в navLinks
@@ -131,6 +132,27 @@
             }
         });
     });
+
+
+    // Звук при наведении на строку таблицы
+    table.forEach((link) => {
+        let played = false; // флаг, указывающий, была ли уже воспроизведена мелодия
+
+        link.addEventListener('mouseover', () => {
+            if (!played) {
+                const hoverSound = new Audio("/sounds/hover-gta.mp3");
+                hoverSound.play();
+                played = true; // установить флаг в true, чтобы мелодия не повторялась
+            }
+        });
+
+        link.addEventListener('mouseleave', () => {
+            played = false; // сбросить флаг при уходе курсора из строки
+        });
+    });
+
+
+
 </script>
 
 
