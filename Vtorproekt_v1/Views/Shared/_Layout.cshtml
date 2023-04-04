@@ -87,9 +87,9 @@
     }
 
     .nav-item {
-       display:flex;
-       flex-wrap:wrap;
-       align-content:center;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
     }
 
     .nav-link {
@@ -117,29 +117,52 @@
 
 @*звуки*@
 <script>
+
+    // Звук при наведении на любые ссылки, кроме ссылок Навбара
     const links = document.querySelectorAll('a');
+    const navLinks = document.querySelectorAll('nav a');
 
     links.forEach((link) => {
-        link.addEventListener('mouseover', () => {
-            const hoverSound = new Audio("/sounds/hover2.mp3");
-            hoverSound.play();
-        });
+        if (!Array.from(navLinks).includes(link)) { // проверяем, что ссылка не находится в navLinks
+            link.addEventListener('mouseover', () => {
+                const hoverSound = new Audio("/sounds/hover2.mp3");
+                hoverSound.play();
+            });
 
-        link.addEventListener('mousedown', (event) => {
-            // Проверяем, что нажатие было левой кнопкой мыши
-            if (event.button === 0) {
-                const clickSound = new Audio("/sounds/click.mp3");
-                clickSound.play();
-            }
-        });
+            // Звук при Нажатии на любую ссылку кроме Навбара
+            link.addEventListener('mousedown', (event) => {
+                // Проверяем, что нажатие было левой кнопкой мыши
+                if (event.button === 0) {
+                    const clickSound = new Audio("/sounds/click.mp3");
+                    clickSound.play();
+                }
+            });
+        }
     });
 
+    // Звук при создании нового объекта (пока не работает - звук перестает играть при переходе не новую страницу)
     const createButtons = document.querySelectorAll('input[value="Create"]');
-
     createButtons.forEach((button) => {
         button.addEventListener('mousedown', () => {
             const createSound = new Audio("/sounds/done1.mp3");
             createSound.play();
+        });
+    });
+
+    // Звук при наведении на ссылки Навбара
+    navLinks.forEach((link) => {
+        link.addEventListener('mouseover', () => {
+            const hoverSound = new Audio("/sounds/hover1.mp3");
+            hoverSound.play();
+        });
+
+        // Звук при Нажатии на любую ссылку  Навбара
+        link.addEventListener('mousedown', (event) => {
+            // Проверяем, что нажатие было левой кнопкой мыши
+            if (event.button === 0) {
+                const clickSound = new Audio("/sounds/click2.mp3");
+                clickSound.play();
+            }
         });
     });
 </script>
