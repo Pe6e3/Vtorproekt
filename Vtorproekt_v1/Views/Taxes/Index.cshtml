@@ -9,7 +9,7 @@
 
 <p>
     <b> Добавить</b>
-    <a asp-action="Create"><img src="img/ico/add.png" /></a>
+    <a asp-action="Create"><img src="img/ico/add.png" class="icon" /></a>
 </p>
 <table class="table text-center">
     <thead>
@@ -90,9 +90,9 @@
                     @Html.DisplayFor(modelItem => item.Multi3)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.TaxId"><img src="img/ico/edit.png" /></a>
-                    @*<a asp-action="Details" asp-route-id="@item.TaxId"><img src="img/ico/info.png" /></a>*@
-                    <a asp-action="Delete" asp-route-id="@item.TaxId"><img src="img/ico/delete.png" /></a>
+                    <a asp-action="Edit" asp-route-id="@item.TaxId"><img src="img/ico/edit.png" class="icon" class="icon" /></a>
+                    @*<a asp-action="Details" asp-route-id="@item.TaxId"><img src="img/ico/info.png" class="icon"class="icon"/></a>*@
+                    <a asp-action="Delete" asp-route-id="@item.TaxId"><img src="img/ico/delete.png" class="icon" class="icon" /></a>
                 </td>
             </tr>
         }

@@ -13,7 +13,7 @@
 </p>
 <p>
     <b> Добавить</b>
-    <a asp-action="Create"><img src="img/ico/add.png" /></a>
+    <a asp-action="Create"><img src="img/ico/add.png" class="icon" /></a>
 </p>
 <table class="table text-center col-md-12 w-100">
     <thead>
@@ -47,12 +47,12 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-        {
+        {   
             <tr>
-                <th>
+                <td>
                     @item.BaleId
 
-                </th>
+                </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
@@ -62,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.Material.MaterialName)
                 </td>
 
-                <th class="col-md-2">
+                <td class="col-md-2">
                     @foreach (Production production in ViewBag.Production)
                     {
                         if (production.BaleId == item.BaleId)
@@ -71,16 +71,16 @@
                         }
                     }
 
-                </th>
+                </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.isReady)
                 </td>
 
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.BaleId"><img src="img/ico/edit.png" /></a> 
-                    <a asp-action="Details" asp-route-id="@item.BaleId"><img src="img/ico/info.png" /></a> 
-                    <a asp-action="Delete" asp-route-id="@item.BaleId"><img src="img/ico/delete.png" /></a>
+                    <a asp-action="Edit" asp-route-id="@item.BaleId"><img src="img/ico/edit.png" class="icon"/></a> 
+                    @*<a asp-action="Details" asp-route-id="@item.BaleId"><img src="img/ico/info.png" class="icon"/></a> *@
+                    <a asp-action="Delete" asp-route-id="@item.BaleId"><img src="img/ico/delete.png" class="icon"/></a>
                 </td>
 
             </tr>
