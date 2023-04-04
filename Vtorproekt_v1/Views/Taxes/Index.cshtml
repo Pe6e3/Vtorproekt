@@ -57,7 +57,7 @@
         {
             <tr>
                 <td>
-                    @item.DateTax
+                    @item.DateTax.ToShortDateString()
                 </td>
                 <td>
                     @foreach (WorkType workType in ViewBag.WorkTypes)
