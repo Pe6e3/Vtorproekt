@@ -15,9 +15,9 @@
     <b> Добавить</b>
     <a asp-action="Create"><img src="img/ico/add.png" class="icon" /></a>
 </p>
-<table class="table text-center col-md-12 w-100">
+<table class="table">
     <thead>
-        <tr>
+        <tr class="table-header">
             <th class="col-md-1">
                 @Html.DisplayNameFor(model => model.BaleId)
             </th>
@@ -42,7 +42,6 @@
                 Действия с тюком
             </th>
 
-            <th></th>
         </tr>
     </thead>
     <tbody>

@@ -11,9 +11,9 @@
     <b> Добавить</b>
     <a asp-action="Create"><img src="img/ico/add.png" class="icon" /></a>
 </p>
-<table class="table text-center">
+<table class="table ">
     <thead>
-        <tr>
+        <tr class="table-header">
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@("Date_asc".Equals(ViewBag.SortOrder) ? "Date_desc" : "Date_asc")">
                     @Html.DisplayNameFor(model => model.DateTax)
