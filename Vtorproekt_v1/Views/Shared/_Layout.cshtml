@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar fixed-top navbar-dark bg-dark  navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow d-flex ">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/img/VPlogo.png" style="height:40px;width:auto; margin-left:30px;" /></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/img/VPlogo.png" style="height:40px;width:auto; margin-left:30px;" class="logo"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -93,6 +93,7 @@
         if (!Array.from(navLinks).includes(link)) { // проверяем, что ссылка не находится в navLinks
             link.addEventListener('mouseover', () => {
                 const hoverSound = new Audio("/sounds/hover2.mp3");
+                hoverSound.volume = 0.3; // уменьшаем громкость на 50%
                 hoverSound.play();
             });
 
@@ -101,6 +102,7 @@
                 // Проверяем, что нажатие было левой кнопкой мыши
                 if (event.button === 0) {
                     const clickSound = new Audio("/sounds/click.mp3");
+                    clickSound.volume = 0.5; // уменьшаем громкость на 50%
                     clickSound.play();
                 }
             });
@@ -112,6 +114,7 @@
     createButtons.forEach((button) => {
         button.addEventListener('mousedown', () => {
             const createSound = new Audio("/sounds/done1.mp3");
+            clickSound.volume = 0.5; // уменьшаем громкость на 50%
             createSound.play();
         });
     });
@@ -120,6 +123,7 @@
     navLinks.forEach((link) => {
         link.addEventListener('mouseover', () => {
             const hoverSound = new Audio("/sounds/hover1.mp3");
+            hoverSound.volume = 0.5; // уменьшаем громкость на 50%
             hoverSound.play();
         });
 
@@ -128,6 +132,7 @@
             // Проверяем, что нажатие было левой кнопкой мыши
             if (event.button === 0) {
                 const clickSound = new Audio("/sounds/click2.mp3");
+                clickSound.volume = 0.5; // уменьшаем громкость на 50%
                 clickSound.play();
             }
         });
@@ -140,7 +145,7 @@
 
         link.addEventListener('mouseover', () => {
             if (!played) {
-                const hoverSound = new Audio("/sounds/hover-gta.mp3");
+                const hoverSound = new Audio("/sounds/hover-gta2.mp3");
                 hoverSound.play();
                 played = true; // установить флаг в true, чтобы мелодия не повторялась
             }
