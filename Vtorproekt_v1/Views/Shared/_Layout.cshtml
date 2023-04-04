@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Neucha&family=Raleway:ital,wght@0,400;0,800;1,400&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
     <header>
@@ -75,29 +77,75 @@
 </body>
 </html>
 
-  <style>
-      header{
-          margin-bottom:120px;
-      }
+<style>
+    header {
+        margin-bottom: 120px;
+    }
+
     .navbar {
         box-shadow: 0 8px 128px rgba(0, 0, 0, 0.3);
     }
 
-      .nav-link{
-          font-size:calc(10px + 1vw);
-          margin-right:30px;
-          font-weight:bold;
-          text-align:center;
+    .nav-item {
+       display:flex;
+       flex-wrap:wrap;
+       align-content:center;
+    }
+
+    .nav-link {
+        font-size: calc(10px + 1vw);
+        margin-right: 30px;
+        font-weight: bold;
+        text-align: center;
         /*font-family: 'Kosugi Maru', sans-serif;*/
         /*font-family: 'Neucha', cursive;*/
         font-family: 'Raleway', sans-serif;
         /*font-family: 'Rubik Mono One', sans-serif;*/
-          transition:0.5s;
-      }
-      .nav-link:hover{
-            transition: 0.5s;
-            transform:scale(1.07);
-      }
+        transition: 0.5s;
+    }
 
-  </style>
+        .nav-link:hover {
+            transition: 0.5s;
+            transform: scale(1.07);
+            onmouseover: playSound();
+        }
+
+</style>
+
+
+
+
+@*звуки*@
+<script>
+    const links = document.querySelectorAll('a');
+
+    links.forEach((link) => {
+        link.addEventListener('mouseover', () => {
+            const hoverSound = new Audio("/sounds/hover2.mp3");
+            hoverSound.play();
+        });
+
+        link.addEventListener('mousedown', (event) => {
+            // Проверяем, что нажатие было левой кнопкой мыши
+            if (event.button === 0) {
+                const clickSound = new Audio("/sounds/click.mp3");
+                clickSound.play();
+            }
+        });
+    });
+
+    const createButtons = document.querySelectorAll('input[value="Create"]');
+
+    createButtons.forEach((button) => {
+        button.addEventListener('mousedown', () => {
+            const createSound = new Audio("/sounds/done1.mp3");
+            createSound.play();
+        });
+    });
+</script>
+
+
+
+@*звуки*@
+
 

@@ -23,3 +23,28 @@ body {
 }
 
 
+.icon {
+    width: 35px;
+    height: 35px;
+    background-color: #ccc;
+    animation-play-state: paused;
+    border-radius: 8px;
+}
+
+@keyframes shake {
+    20% {
+        transform: rotate(15deg);
+    }
+
+    80% {
+        transform: rotate(-20deg);
+        transform: scale(1.2);
+    }
+}
+
+.icon:hover {
+    transform: scale(1.2);
+    animation: shake 0.4s ease;
+    animation-play-state: running;
+    animation-delay: 0.1s;
+}
