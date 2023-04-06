@@ -28,7 +28,6 @@ namespace Vtorproekt.Controllers
                 .Include(t => t.WorkType);
 
 
-
             switch (sortOrder)
             {
                 case "Date_desc": SortOrder = SortOrder.OrderByDescending(tax => tax.DateTax); break;
@@ -38,9 +37,7 @@ namespace Vtorproekt.Controllers
                 default: break;
             }
 
-
             return View(await SortOrder.AsNoTracking().ToListAsync());
-            //return View(await SortOrder.ToListAsync());
 
         }
 
