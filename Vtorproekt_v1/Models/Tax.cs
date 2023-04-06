@@ -14,9 +14,9 @@ namespace Vtorproekt.Models
         public int WorkTypeId { get; set; }
 
 
-        //[Display(Name = "Вид сырья")]
-        //[ForeignKey(nameof(MaterialId))]
-        //public int MaterialId { get; set; }
+        [Display(Name = "Вид сырья")]
+        [ForeignKey(nameof(MaterialId))]
+        public int MaterialId { get; set; }
 
 
 
@@ -48,7 +48,7 @@ namespace Vtorproekt.Models
 
         public virtual ICollection<Production>? Productions { get; set; }
         public virtual WorkType? WorkType { get; set; }
-        //public virtual Material? Material { get; set; }
+        public virtual Material? Material { get; set; }
         
     }
 }

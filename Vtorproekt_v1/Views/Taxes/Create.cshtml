@@ -26,6 +26,13 @@
                 <span asp-validation-for="WorkTypeId" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <label asp-for="MaterialId" class="control-label"></label>
+                <select asp-for="MaterialId" class="form-select" asp-items="@ViewBag.Materials">
+                    <option value="">Выберите вид сырья</option>
+                </select>
+                <span asp-validation-for="MaterialId" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="TaxValue" class="control-label"></label>
@@ -66,8 +73,8 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" style="background: none; border: none;">
-                    <img src="/ico/add2.png" alt="Create" class="iconBig" />
+                <button type="submit" value="Save" style="background: none; border: none;">
+                    <img src="/ico/save.png" alt="Create" class="iconBig" />
                 </button>
             </div>
         </form>

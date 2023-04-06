@@ -28,8 +28,7 @@
                 </a>
             </th>
 
-            @*<th> @Html.DisplayNameFor(model=>model.WorkType.Material.MaterialName)</th>*@
-            <th> Вид сырья</th>
+            <th> @Html.DisplayNameFor(model=>model.Material.MaterialName)</th>
             <th>
                 @Html.DisplayNameFor(model => model.TaxValue)
             </th>
@@ -67,7 +66,7 @@
                 </td>
 
                 <td>
-                    @*@Html.DisplayFor(modelItem=>item.Material.MaterialName)*@
+                    @Html.DisplayFor(modelItem=>item.Material.MaterialName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TaxValue)
