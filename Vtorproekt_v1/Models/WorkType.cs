@@ -10,9 +10,5 @@ namespace Vtorproekt.Models
         public string WorkTypeName { get; set; } =string.Empty;
 
 
-        [Display(Name = "Какой материал в работе")]
-        [ForeignKey(nameof(MaterialId))]
-        public int MaterialId { get; set; }
-        public virtual Material? Material { get; set; }
     }
 }

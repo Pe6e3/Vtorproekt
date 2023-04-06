@@ -26,8 +26,7 @@ namespace Vtorproekt.Controllers
             ViewData["SortOrder"] = sortOrder;
 
 
-            IQueryable<WorkType> workTypes = _db.WorkTypes
-                .Include(w => w.Material);
+            IQueryable<WorkType> workTypes = _db.WorkTypes;
 
             switch (sortOrder)
             {
@@ -64,7 +63,6 @@ namespace Vtorproekt.Controllers
         // GET: WorkTypes/Create
         public IActionResult Create()
         {
-            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialName");
             return View();
         }
 
@@ -73,7 +71,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkTypeId,WorkTypeName,MaterialId")] WorkType workType)
+        public async Task<IActionResult> Create([Bind("WorkTypeId,WorkTypeName")] WorkType workType)
         {
             if (ModelState.IsValid)
             {
@@ -87,10 +85,7 @@ namespace Vtorproekt.Controllers
         // GET: WorkTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialName");
-
             var workType = await _db.WorkTypes
-                .Include(w => w.Material)
                 .FirstOrDefaultAsync(w => w.WorkTypeId == id);
 
             return View(workType);
@@ -101,7 +96,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WorkTypeId,WorkTypeName,MaterialId")] WorkType workType)
+        public async Task<IActionResult> Edit(int id, [Bind("WorkTypeId,WorkTypeName")] WorkType workType)
         {
             if (id != workType.WorkTypeId)
             {

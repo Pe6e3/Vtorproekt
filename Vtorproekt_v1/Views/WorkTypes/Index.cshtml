@@ -17,9 +17,7 @@
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@("WorkTypeName_asc".Equals(ViewData["SortOrder"]) ? "WorkTypeName_desc" : "WorkTypeName_asc")">Вид работы</a>
             </th>
-            <th>
-                Сырье
-            </th>
+           
             <th>Действия с видом работы</th>
         </tr>
     </thead>
@@ -29,9 +27,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.WorkTypeName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material.MaterialName)
-            </td>
+          
             <td>
                     <a asp-action="Edit" asp-route-id="@item.WorkTypeId"><img src="/ico/edit2.png" class="icon" /></a>
                     <a asp-action="Details" asp-route-id="@item.WorkTypeId"><img src="/ico/info1.png" class="icon" /></a>
