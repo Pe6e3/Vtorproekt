@@ -74,7 +74,7 @@ namespace Vtorproekt.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
 
-                    b.Property<string>("MaterialName")
+                    b.Property<string>("MaterialNameStart")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

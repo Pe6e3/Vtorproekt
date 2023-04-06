@@ -14,7 +14,7 @@
     <thead>
         <tr class="table-header">
             <th>
-                @Html.DisplayNameFor(model => model.MaterialName)
+                @Html.DisplayNameFor(model => model.MaterialNameStart)
             </th>
             <th> Действия с видом сырья</th>
         </tr>
@@ -24,7 +24,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MaterialName)
+                    @Html.DisplayFor(modelItem => item.MaterialNameStart)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.MaterialId"><img src="/ico/edit2.png" class="icon" /></a>

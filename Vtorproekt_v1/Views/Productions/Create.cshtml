@@ -34,7 +34,7 @@
                 <select asp-for="BaleId" class="form-control">
                     @foreach (Bale bale in ViewBag.BaleEmpty)
                     {
-                        <option value="@bale.BaleId"> @bale.BaleId - @bale.Material.MaterialName (@bale.Employee.EmployeeName)</option>
+                        <option value="@bale.BaleId"> @bale.BaleId - @bale.Material.MaterialNameStart (@bale.Employee.EmployeeName)</option>
                     }
 
                 </select>

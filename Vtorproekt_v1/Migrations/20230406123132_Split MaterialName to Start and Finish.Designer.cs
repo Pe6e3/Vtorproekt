@@ -12,8 +12,8 @@ using Vtorproekt.Data;
 namespace Vtorproekt.Migrations
 {
     [DbContext(typeof(VtorproektContext))]
-    [Migration("20230403032546_Change name of property TaxName to WorkTypeId")]
-    partial class ChangenameofpropertyTaxNametoWorkTypeId
+    [Migration("20230406123132_Split MaterialName to Start and Finish")]
+    partial class SplitMaterialNametoStartandFinish
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,6 +76,10 @@ namespace Vtorproekt.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
+
+                    b.Property<string>("MaterialNameFinish")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MaterialNameStart")
                         .IsRequired()
@@ -174,6 +178,9 @@ namespace Vtorproekt.Migrations
                     b.Property<double>("Limit3")
                         .HasColumnType("float");
 
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Multi1")
                         .HasColumnType("float");
 
@@ -190,6 +197,10 @@ namespace Vtorproekt.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("TaxId");
+
+                    b.HasIndex("MaterialId");
+
+                    b.HasIndex("WorkTypeId");
 
                     b.ToTable("Taxes");
                 });
@@ -259,6 +270,25 @@ namespace Vtorproekt.Migrations
                     b.Navigation("Storage");
 
                     b.Navigation("TaxValue");
+
+                    b.Navigation("WorkType");
+                });
+
+            modelBuilder.Entity("Vtorproekt.Models.Tax", b =>
+                {
+                    b.HasOne("Vtorproekt.Models.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Vtorproekt.Models.WorkType", "WorkType")
+                        .WithMany()
+                        .HasForeignKey("WorkTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Material");
 
                     b.Navigation("WorkType");
                 });

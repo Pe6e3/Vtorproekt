@@ -64,7 +64,7 @@ namespace Vtorproekt.Controllers
         public IActionResult Create()
         {
             ViewBag.WorkTypes = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName");
-            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialName");
+            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialNameStart");
 
             return View();
         }
@@ -89,7 +89,7 @@ namespace Vtorproekt.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.WorkTypes = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName");
-            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialName");
+            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialNameStart");
             if (id == null || _db.Taxes == null)
             {
                 return NotFound();

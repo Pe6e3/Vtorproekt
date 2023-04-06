@@ -79,7 +79,7 @@ namespace Vtorproekt.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Employee"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeName", bale.EmployeeId);
-            ViewData["Material"] = new SelectList(_db.Materials, "MaterialId", "MaterialName", bale.MaterialId);
+            ViewData["Material"] = new SelectList(_db.Materials, "MaterialId", "MaterialNameStart", bale.MaterialId);
             return View(bale);
         }
 
@@ -97,7 +97,7 @@ namespace Vtorproekt.Controllers
                 return NotFound();
             }
             ViewData["Employee"] = new SelectList(_db.Employees, "EmployeeId", "EmployeeName", bale.EmployeeId);
-            ViewData["Material"] = new SelectList(_db.Materials, "MaterialId", "MaterialName", bale.MaterialId);
+            ViewData["Material"] = new SelectList(_db.Materials, "MaterialId", "MaterialNameStart", bale.MaterialId);
             return View(bale);
         }
 

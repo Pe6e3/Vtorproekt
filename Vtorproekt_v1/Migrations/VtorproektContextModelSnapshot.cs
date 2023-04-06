@@ -74,7 +74,11 @@ namespace Vtorproekt.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
 
-                    b.Property<string>("MaterialName")
+                    b.Property<string>("MaterialNameFinish")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaterialNameStart")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -191,6 +195,8 @@ namespace Vtorproekt.Migrations
 
                     b.HasKey("TaxId");
 
+                    b.HasIndex("MaterialId");
+
                     b.HasIndex("WorkTypeId");
 
                     b.ToTable("Taxes");
@@ -267,11 +273,19 @@ namespace Vtorproekt.Migrations
 
             modelBuilder.Entity("Vtorproekt.Models.Tax", b =>
                 {
+                    b.HasOne("Vtorproekt.Models.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Vtorproekt.Models.WorkType", "WorkType")
                         .WithMany()
                         .HasForeignKey("WorkTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Material");
 
                     b.Navigation("WorkType");
                 });

@@ -56,7 +56,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaterialId,MaterialName")] Material material)
+        public async Task<IActionResult> Create([Bind("MaterialId,MaterialNameStart")] Material material)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaterialId,MaterialName")] Material material)
+        public async Task<IActionResult> Edit(int id, [Bind("MaterialId,MaterialNameStart")] Material material)
         {
             if (id != material.MaterialId)
             {
