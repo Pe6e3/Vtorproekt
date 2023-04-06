@@ -13,6 +13,11 @@ namespace Vtorproekt.Models
         [ForeignKey(nameof(WorkTypeId))]
         public int WorkTypeId { get; set; }
 
+        [Display(Name = "Какой материал в работе")]
+        [ForeignKey(nameof(MaterialId))]
+        public int MaterialId { get; set; }
+
+
         [Display(Name = "Дата ввода тарифа")]
         [DisplayFormat(DataFormatString = "yyyy-MM-ddTHH:mm", ApplyFormatInEditMode = true)]
         public DateTime DateTax { get; set; }
@@ -41,6 +46,7 @@ namespace Vtorproekt.Models
 
         public virtual ICollection<Production>? Productions { get; set; }
         public virtual WorkType? WorkType { get; set; }
+        public virtual Material? Material { get; set; }
         
     }
 }
