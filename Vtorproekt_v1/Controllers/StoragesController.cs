@@ -12,30 +12,30 @@ namespace Vtorproekt.Controllers
 {
     public class StoragesController : Controller
     {
-        private readonly VtorproektContext _context;
+        private readonly VtorproektContext _db;
 
-        public StoragesController(VtorproektContext context)
+        public StoragesController(VtorproektContext db)
         {
-            _context = context;
+            _db = db;
         }
 
         // GET: Storages
         public async Task<IActionResult> Index()
         {
-              return _context.Storages != null ? 
-                          View(await _context.Storages.ToListAsync()) :
+              return _db.Storages != null ? 
+                          View(await _db.Storages.ToListAsync()) :
                           Problem("Entity set 'VtorproektContext.Storages'  is null.");
         }
 
         // GET: Storages/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Storages == null)
+            if (id == null || _db.Storages == null)
             {
                 return NotFound();
             }
 
-            var storage = await _context.Storages
+            var storage = await _db.Storages
                 .FirstOrDefaultAsync(m => m.StorageId == id);
             if (storage == null)
             {
@@ -56,12 +56,12 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StorageId,StorageArdess")] Storage storage)
+        public async Task<IActionResult> Create([Bind("StorageId,StorageAdress")] Storage storage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(storage);
-                await _context.SaveChangesAsync();
+                _db.Add(storage);
+                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(storage);
@@ -70,12 +70,12 @@ namespace Vtorproekt.Controllers
         // GET: Storages/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Storages == null)
+            if (id == null || _db.Storages == null)
             {
                 return NotFound();
             }
 
-            var storage = await _context.Storages.FindAsync(id);
+            var storage = await _db.Storages.FindAsync(id);
             if (storage == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StorageId,StorageArdess")] Storage storage)
+        public async Task<IActionResult> Edit(int id, [Bind("StorageId,StorageAdress")] Storage storage)
         {
             if (id != storage.StorageId)
             {
@@ -99,8 +99,8 @@ namespace Vtorproekt.Controllers
             {
                 try
                 {
-                    _context.Update(storage);
-                    await _context.SaveChangesAsync();
+                    _db.Update(storage);
+                    await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,12 +121,12 @@ namespace Vtorproekt.Controllers
         // GET: Storages/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Storages == null)
+            if (id == null || _db.Storages == null)
             {
                 return NotFound();
             }
 
-            var storage = await _context.Storages
+            var storage = await _db.Storages
                 .FirstOrDefaultAsync(m => m.StorageId == id);
             if (storage == null)
             {
@@ -141,23 +141,23 @@ namespace Vtorproekt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Storages == null)
+            if (_db.Storages == null)
             {
                 return Problem("Entity set 'VtorproektContext.Storages'  is null.");
             }
-            var storage = await _context.Storages.FindAsync(id);
+            var storage = await _db.Storages.FindAsync(id);
             if (storage != null)
             {
-                _context.Storages.Remove(storage);
+                _db.Storages.Remove(storage);
             }
             
-            await _context.SaveChangesAsync();
+            await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StorageExists(int id)
         {
-          return (_context.Storages?.Any(e => e.StorageId == id)).GetValueOrDefault();
+          return (_db.Storages?.Any(e => e.StorageId == id)).GetValueOrDefault();
         }
     }
 }

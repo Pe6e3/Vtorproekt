@@ -11,7 +11,7 @@ namespace Vtorproekt.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "StorageArdess",
+                name: "StorageAdress",
                 table: "Storages",
                 newName: "StorageAdress");
         }
@@ -22,7 +22,7 @@ namespace Vtorproekt.Migrations
             migrationBuilder.RenameColumn(
                 name: "StorageAdress",
                 table: "Storages",
-                newName: "StorageArdess");
+                newName: "StorageAdress");
         }
     }
 }

@@ -141,7 +141,7 @@ namespace Vtorproekt.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StorageId"));
 
-                    b.Property<string>("StorageArdess")
+                    b.Property<string>("StorageAdress")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");

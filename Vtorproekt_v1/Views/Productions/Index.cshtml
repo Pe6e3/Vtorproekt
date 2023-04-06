@@ -39,6 +39,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.TaxId)
             </th>
+            <th>
+                Оплата
+            </th>
             <th> Действия со строкой</th>
         </tr>
     </thead>
@@ -85,15 +88,23 @@
                     {
                         if (tax.TaxId == item.TaxId)
                         {
-                            @tax.WorkTypeId
-                            ;
-                            <br />
                             @tax.TaxValue
-                            ;
                             <slot>коп. </slot>
                         }
                     }
                 </td>
+
+                <td>
+                    @foreach (Tax tax in ViewBag.Tax)
+                    {
+                        if (tax.TaxId == item.TaxId)
+                        {
+                            @(tax.TaxValue * item.Weight / 100);
+                            <slot>р. </slot>
+                        }
+                    }
+                </td>
+
                 <td>
 
                     <a asp-action="Edit" asp-route-id="@item.ProductionId"><img src="/ico/edit2.png" class="icon" /></a>

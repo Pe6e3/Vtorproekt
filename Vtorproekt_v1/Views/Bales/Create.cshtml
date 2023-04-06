@@ -2,12 +2,12 @@
 @model Vtorproekt.Models.Bale
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Новый тюк";
 }
 
-<h1>Create</h1>
+<h1>Новый тюк</h1>
 
-<h4>Bale</h4>
+<h4>Добавить</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -40,9 +40,10 @@
             </div>
 
           
-
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" style="background: none; border: none;">
+                    <img src="/ico/add2.png" alt="Create" class="iconBig" />
+                </button>
             </div>
 
         </form>
@@ -50,7 +51,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Вернуться к списку тюков</a>
 </div>
 
 @section Scripts {

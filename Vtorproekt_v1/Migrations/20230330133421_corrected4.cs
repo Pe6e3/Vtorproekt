@@ -43,7 +43,7 @@ namespace Vtorproekt.Migrations
                 {
                     StorageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StorageArdess = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
+                    StorageAdress = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {

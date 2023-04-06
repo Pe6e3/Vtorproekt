@@ -27,7 +27,7 @@ namespace Vtorproekt.Controllers
 
 
             IQueryable<WorkType> workTypes = _db.WorkTypes
-                .Include(w=>w.Material);
+                .Include(w => w.Material);
 
             switch (sortOrder)
             {
@@ -64,6 +64,7 @@ namespace Vtorproekt.Controllers
         // GET: WorkTypes/Create
         public IActionResult Create()
         {
+            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialName");
             return View();
         }
 
@@ -72,7 +73,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkTypeId,WorkTypeName")] WorkType workType)
+        public async Task<IActionResult> Create([Bind("WorkTypeId,WorkTypeName,MaterialId")] WorkType workType)
         {
             if (ModelState.IsValid)
             {
@@ -86,16 +87,12 @@ namespace Vtorproekt.Controllers
         // GET: WorkTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _db.WorkTypes == null)
-            {
-                return NotFound();
-            }
+            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialName");
 
-            var workType = await _db.WorkTypes.FindAsync(id);
-            if (workType == null)
-            {
-                return NotFound();
-            }
+            var workType = await _db.WorkTypes
+                .Include(w => w.Material)
+                .FirstOrDefaultAsync(w => w.WorkTypeId == id);
+
             return View(workType);
         }
 
@@ -104,7 +101,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WorkTypeId,WorkTypeName")] WorkType workType)
+        public async Task<IActionResult> Edit(int id, [Bind("WorkTypeId,WorkTypeName,MaterialId")] WorkType workType)
         {
             if (id != workType.WorkTypeId)
             {
@@ -166,14 +163,14 @@ namespace Vtorproekt.Controllers
             {
                 _db.WorkTypes.Remove(workType);
             }
-            
+
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool WorkTypeExists(int id)
         {
-          return (_db.WorkTypes?.Any(e => e.WorkTypeId == id)).GetValueOrDefault();
+            return (_db.WorkTypes?.Any(e => e.WorkTypeId == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿@model Vtorproekt.Models.Material
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Новый вид сырья";
 }
 
-<h1>Create</h1>
+<h1>Новый вид сырья</h1>
 
-<h4>Material</h4>
+<h4>Добавить</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,17 +17,28 @@
                 <input asp-for="MaterialName" class="form-control" />
                 <span asp-validation-for="MaterialName" class="text-danger"></span>
             </div>
+            <br />
+
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" style="background: none; border: none;">
+                    <img src="/ico/add2.png" alt="Create" class="iconBig" />
+                </button>
             </div>
+
+
+
+
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">назад к списку Видов сырья</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

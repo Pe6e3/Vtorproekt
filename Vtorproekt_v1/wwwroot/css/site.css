@@ -31,7 +31,7 @@ body {
 h1, h2, h3, h4, h5 {
     font-family: My-W3, sans-serif;
     margin: 20px 10px 20px 10px;
-    text-align:center;
+    text-align: center;
 }
 
 b {
@@ -61,7 +61,7 @@ tr {
 }
 
 table {
-    max-width:100%;
+    max-width: 100%;
     text-align: center;
     vertical-align: middle;
     margin: 0 auto;
@@ -94,8 +94,8 @@ body {
 
 
 .icon {
-    width: 35px;
     height: 35px;
+    width: 35px;
     background-color: #ccc;
     animation-play-state: paused;
     border-radius: 20px;
@@ -120,10 +120,31 @@ body {
     box-shadow: 0 0 7px #fcff00;
 }
 
-.logo{
-    transition:0.5s;
-    border-radius:20px;
+.iconBig {
+    height: 50px;
+    width: auto;
+    animation-play-state: paused;
+    transition: transform 0.6s ease;
 }
+
+    .iconBig:hover {
+        transform: scale(1.2);
+        animation: shake 0.3s ease;
+        animation-play-state: running;
+        background: radial-gradient(circle at center, #ffff00 4%, rgba(255, 255, 0, 0.8) 60%, rgba(255, 255, 0, 0) 100%);
+        box-shadow: 0 0 20px #fcff00;
+        position: relative;
+    }
+
+
+
+
+
+.logo {
+    transition: 0.5s;
+    border-radius: 20px;
+}
+
     .logo:hover {
         transform: scale(1.2);
         animation: shake 0.3s ease;
