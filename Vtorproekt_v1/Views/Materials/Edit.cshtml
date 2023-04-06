@@ -1,12 +1,12 @@
 ﻿@model Vtorproekt.Models.Material
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Изменить виды сырья";
 }
 
-<h1>Edit</h1>
+<h1>Изменить виды сырья</h1>
 
-<h4>Material</h4>
+<h4>Редактировать</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,14 +19,23 @@
                 <span asp-validation-for="MaterialNameStart" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="MaterialNameFinish" class="control-label"></label>
+                <input asp-for="MaterialNameFinish" class="form-control" />
+                <span asp-validation-for="MaterialNameFinish" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" value="Save" style="background: none; border: none;">
+                    <img src="/ico/save.png" alt="Изменить" class="iconBig" />
+                </button>
             </div>
         </form>
     </div>
 </div>
+            <br/>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Вернуться к видам сырья</a>
 </div>
 
 @section Scripts {

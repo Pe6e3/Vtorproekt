@@ -12,30 +12,30 @@ namespace Vtorproekt.Controllers
 {
     public class MaterialsController : Controller
     {
-        private readonly VtorproektContext _context;
+        private readonly VtorproektContext _db;
 
-        public MaterialsController(VtorproektContext context)
+        public MaterialsController(VtorproektContext db)
         {
-            _context = context;
+            _db = db;
         }
 
         // GET: Materials
         public async Task<IActionResult> Index()
         {
-              return _context.Materials != null ? 
-                          View(await _context.Materials.ToListAsync()) :
+              return _db.Materials != null ? 
+                          View(await _db.Materials.ToListAsync()) :
                           Problem("Entity set 'VtorproektContext.Materials'  is null.");
         }
 
         // GET: Materials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Materials == null)
+            if (id == null || _db.Materials == null)
             {
                 return NotFound();
             }
 
-            var material = await _context.Materials
+            var material = await _db.Materials
                 .FirstOrDefaultAsync(m => m.MaterialId == id);
             if (material == null)
             {
@@ -56,12 +56,12 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaterialId,MaterialNameStart")] Material material)
+        public async Task<IActionResult> Create([Bind("MaterialId,MaterialNameStart,MaterialNameFinish")] Material material)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(material);
-                await _context.SaveChangesAsync();
+                _db.Add(material);
+                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(material);
@@ -70,12 +70,12 @@ namespace Vtorproekt.Controllers
         // GET: Materials/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Materials == null)
+            if (id == null || _db.Materials == null)
             {
                 return NotFound();
             }
 
-            var material = await _context.Materials.FindAsync(id);
+            var material = await _db.Materials.FindAsync(id);
             if (material == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaterialId,MaterialNameStart")] Material material)
+        public async Task<IActionResult> Edit(int id, [Bind("MaterialId,MaterialNameStart,MaterialNameFinish")] Material material)
         {
             if (id != material.MaterialId)
             {
@@ -99,8 +99,8 @@ namespace Vtorproekt.Controllers
             {
                 try
                 {
-                    _context.Update(material);
-                    await _context.SaveChangesAsync();
+                    _db.Update(material);
+                    await _db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,12 +121,12 @@ namespace Vtorproekt.Controllers
         // GET: Materials/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Materials == null)
+            if (id == null || _db.Materials == null)
             {
                 return NotFound();
             }
 
-            var material = await _context.Materials
+            var material = await _db.Materials
                 .FirstOrDefaultAsync(m => m.MaterialId == id);
             if (material == null)
             {
@@ -141,23 +141,23 @@ namespace Vtorproekt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Materials == null)
+            if (_db.Materials == null)
             {
                 return Problem("Entity set 'VtorproektContext.Materials'  is null.");
             }
-            var material = await _context.Materials.FindAsync(id);
+            var material = await _db.Materials.FindAsync(id);
             if (material != null)
             {
-                _context.Materials.Remove(material);
+                _db.Materials.Remove(material);
             }
             
-            await _context.SaveChangesAsync();
+            await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MaterialExists(int id)
         {
-          return (_context.Materials?.Any(e => e.MaterialId == id)).GetValueOrDefault();
+          return (_db.Materials?.Any(e => e.MaterialId == id)).GetValueOrDefault();
         }
     }
 }
