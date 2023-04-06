@@ -16,6 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.MaterialNameStart)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialNameFinish)
+            </th>
             <th> Действия с видом сырья</th>
         </tr>
     </thead>
@@ -25,6 +28,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.MaterialNameStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaterialNameFinish)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.MaterialId"><img src="/ico/edit2.png" class="icon" /></a>
