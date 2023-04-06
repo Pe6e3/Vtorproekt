@@ -26,9 +26,10 @@
                 <a asp-action="Index" asp-route-sortOrder="@("WorkType_asc".Equals(ViewBag.SortOrder)?"WorkType_desc":"WorkType_asc" )">
                     @Html.DisplayNameFor(model => model.WorkTypeId)
                 </a>
-
-
             </th>
+
+            @*<th> @Html.DisplayNameFor(model=>model.WorkType.Material.MaterialName)</th>*@
+            <th> Вид сырья</th>
             <th>
                 @Html.DisplayNameFor(model => model.TaxValue)
             </th>
@@ -63,6 +64,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.WorkType.WorkTypeName)
 
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem=>item.WorkType.Material.MaterialName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TaxValue)
