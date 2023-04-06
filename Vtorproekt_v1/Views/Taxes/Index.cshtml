@@ -61,13 +61,8 @@
                     @item.DateTax.ToShortDateString()
                 </td>
                 <td>
-                    @foreach (WorkType workType in ViewBag.WorkTypes)
-                    {
-                        if (workType.WorkTypeId == item.WorkTypeId)
-                        {
-                            @workType.WorkTypeName
-                        }
-                    }
+                    @Html.DisplayFor(modelItem => item.WorkType.WorkTypeName)
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TaxValue)
