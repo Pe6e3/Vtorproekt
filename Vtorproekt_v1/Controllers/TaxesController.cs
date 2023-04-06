@@ -64,7 +64,7 @@ namespace Vtorproekt.Controllers
         public IActionResult Create()
         {
             ViewBag.WorkTypes = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName");
-            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialNameStart");
+            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialNameFinish");
 
             return View();
         }
@@ -74,7 +74,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TaxId,WorkTypeId,MaterialId,DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
+        public async Task<IActionResult> Create([Bind("TaxId,WorkTypeId,MaterialId,DateTax,TaxValue")] Tax tax)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace Vtorproekt.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.WorkTypes = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName");
-            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialNameStart");
+            ViewBag.Materials = new SelectList(_db.Materials, "MaterialId", "MaterialNameFinish");
             if (id == null || _db.Taxes == null)
             {
                 return NotFound();
@@ -111,7 +111,7 @@ namespace Vtorproekt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaxId,WorkTypeId,MaterialId, DateTax,TaxValue,Limit1,Limit2,Limit3,Multi1,Multi2,Multi3")] Tax tax)
+        public async Task<IActionResult> Edit(int id, [Bind("TaxId,WorkTypeId,MaterialId, DateTax,TaxValue")] Tax tax)
         {
             if (id != tax.TaxId)
             {

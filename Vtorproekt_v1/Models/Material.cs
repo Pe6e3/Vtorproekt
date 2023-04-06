@@ -7,10 +7,10 @@ public class Material
     [Key] public int MaterialId { get; set; }
 
 
-    [Display(Name = "Название сырья")]
+    [Display(Name = "Из чего делаем")]
     public string MaterialNameStart { get; set; } = string.Empty;
 
-    [Display(Name = "Название готового продукта")]
+    [Display(Name = "Что получаем")]
     public string MaterialNameFinish { get; set; } = string.Empty;
 
 

@@ -29,27 +29,8 @@
             </th>
 
             <th> @Html.DisplayNameFor(model=>model.Material.MaterialNameStart)</th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaxValue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Limit1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Limit2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Limit3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Multi1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Multi2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Multi3)
-            </th>
+            <th> @Html.DisplayNameFor(model=>model.Material.MaterialNameFinish)</th>
+            <th>@Html.DisplayNameFor(model => model.TaxValue)</th>
             <th> Действия с тарифом</th>
         </tr>
     </thead>
@@ -65,30 +46,9 @@
 
                 </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem=>item.Material.MaterialNameStart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaxValue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Limit1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Limit2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Limit3)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Multi1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Multi2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Multi3)
-                </td>
+                <td>@Html.DisplayFor(modelItem=>item.Material.MaterialNameStart)</td>
+                <td>@Html.DisplayFor(modelItem=>item.Material.MaterialNameFinish)</td>
+                <td>@Html.DisplayFor(modelItem => item.TaxValue) к. </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.TaxId"><img src="/ico/edit2.png" class="icon" class="icon" /></a>
                     @*<a asp-action="Details" asp-route-id="@item.TaxId"><img src="/ico/info1.png" class="icon"class="icon"/></a>*@
