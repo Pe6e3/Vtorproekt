@@ -23,7 +23,7 @@ namespace Vtorproekt.Models
 
 
 
-        [Display(Name = "Вес тюка/бэга")]
+        [Display(Name = "Вес готового сырья")]
         [Range(10, 1000, ErrorMessage = "Недопустимый вес (от 10 до 1000кг)")]
         public double Weight { get; set; }
 

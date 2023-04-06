@@ -15,46 +15,25 @@
 <table class="table">
     <thead>
         <tr class="table-header">
-            <th>
-                @Html.DisplayNameFor(model => model.BaleId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTypeId)
-            </th>
-            <th>
-                Кто произвел
-            </th>
-            <th>
-                Что произвел
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StorageId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProduceDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaxId)
-            </th>
-            <th>
-                Оплата
-            </th>
+            <th>@Html.DisplayNameFor(model => model.BaleId)</th>
+            <th>@Html.DisplayNameFor(model => model.WorkTypeId)</th>
+            <th>Кто произвел</th>
+            <th>Что произвел</th>
+            <th>@Html.DisplayNameFor(model => model.Weight)</th>
+            <th>@Html.DisplayNameFor(model => model.ProduceDate)</th>
+            <th>@Html.DisplayNameFor(model => model.TaxId)</th>
+            <th>Оплата</th>
+            <th>@Html.DisplayNameFor(model => model.StorageId)</th>
             <th> Действия со строкой</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BaleId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkType.WorkTypeName)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.BaleId)</td>
+                <td>@Html.DisplayFor(modelItem => item.WorkType.WorkTypeName)</td>
                 <td>
                     @foreach (Bale bale in ViewBag.Bale)
                     {
@@ -70,19 +49,12 @@
                     {
                         if (bale.BaleId == item.BaleId)
                         {
-                            @bale.Material.MaterialNameStart
+                            @bale.Material.MaterialNameFinish
                         }
                     }
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Weight)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Storage.StorageAdress)
-                </td>
-                <td>
-                    @item.ProduceDate
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Weight)</td>
+                <td>@item.ProduceDate</td>
                 <td>
                     @foreach (Tax tax in ViewBag.Tax)
                     {
@@ -99,11 +71,13 @@
                     {
                         if (tax.TaxId == item.TaxId)
                         {
-                            @(tax.TaxValue * item.Weight / 100);
+                            @(tax.TaxValue * item.Weight / 100)
+                            ;
                             <slot>р. </slot>
                         }
                     }
                 </td>
+                <td>@Html.DisplayFor(modelItem => item.Storage.StorageAdress)</td>
 
                 <td>
 

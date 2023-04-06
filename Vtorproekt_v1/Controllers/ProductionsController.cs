@@ -23,10 +23,10 @@ namespace Vtorproekt.Controllers
         public async Task<IActionResult> Index()
         {
             var vtorproektContext = _db.Productions.Include(p => p.Storage).Include(p => p.WorkType);
-            ViewBag.Bale = _db.Bales.ToList();
-            ViewBag.Employee = _db.Employees.ToList();
-            ViewBag.Material = _db.Materials.ToList();
-            ViewBag.Tax = _db.Taxes.ToList();
+            ViewBag.Bale = _db.Bales;
+            ViewBag.Employee = _db.Employees;
+            ViewBag.Material = _db.Materials;
+            ViewBag.Tax = _db.Taxes;
 
             return View(await vtorproektContext.ToListAsync());
         }
@@ -54,12 +54,12 @@ namespace Vtorproekt.Controllers
         // GET: Productions/Create
         public IActionResult Create()
         {
-            ViewBag.Storage = _db.Storages.ToList();
-            ViewBag.WorkType = _db.WorkTypes.ToList();
-            ViewBag.Bale = _db.Bales.ToList();
-            ViewBag.Tax = _db.Taxes.ToList();
-            ViewBag.Storager = _db.Employees.ToList();
-            ViewBag.Material = _db.Materials.ToList();
+            ViewBag.Storage = _db.Storages;
+            ViewBag.WorkType = _db.WorkTypes;
+            ViewBag.Bale = _db.Bales;
+            ViewBag.Tax = _db.Taxes;
+            ViewBag.Storager = _db.Employees;
+            ViewBag.Material = _db.Materials;
 
             ViewBag.BaleEmpty = _db.Bales.Where(bale=>bale.isReady==false).ToList();
 
@@ -97,13 +97,13 @@ namespace Vtorproekt.Controllers
         // GET: Productions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.Storage = _db.Storages.ToList();
-            ViewBag.WorkType = _db.WorkTypes.ToList();
-            ViewBag.Bale = _db.Bales.ToList();
-            ViewBag.Tax = _db.Taxes.ToList();
-            ViewBag.Storager = _db.Employees.ToList();
-            ViewBag.Material = _db.Materials.ToList();
-            ViewBag.BaleEmpty = _db.Bales.Where(bale => bale.isReady == false).ToList();
+            ViewBag.Storage = _db.Storages;
+            ViewBag.WorkType = _db.WorkTypes;
+            ViewBag.Bale = _db.Bales;
+            ViewBag.Tax = _db.Taxes;
+            ViewBag.Storager = _db.Employees;
+            ViewBag.Material = _db.Materials;
+            ViewBag.BaleEmpty = _db.Bales.Where(bale => bale.isReady == false);
 
 
             if (id == null || _db.Productions == null)
