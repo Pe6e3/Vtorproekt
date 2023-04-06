@@ -24,8 +24,8 @@ namespace Vtorproekt.Controllers
         {
             ViewBag.SortOrder = sortOrder;
             IQueryable<Tax> SortOrder = _db.Taxes
-                //.Include(t => t.Material)
                 .Include(t => t.WorkType);
+                //.Include(t => t.Material);
 
 
             switch (sortOrder)

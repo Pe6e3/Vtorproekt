@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Vtorproekt.Data;
 using Vtorproekt.Models;
 
@@ -24,8 +25,9 @@ namespace Vtorproekt.Controllers
         {
             ViewData["SortOrder"] = sortOrder;
 
-            var workTypes = from wt in _db.WorkTypes
-                            select wt;
+
+            IQueryable<WorkType> workTypes = _db.WorkTypes
+                .Include(w=>w.Material);
 
             switch (sortOrder)
             {
