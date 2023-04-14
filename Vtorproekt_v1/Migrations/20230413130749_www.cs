@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Vtorproekt.Migrations
 {
     /// <inheritdoc />
-    public partial class corrected4 : Migration
+    public partial class www : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,8 @@ namespace Vtorproekt.Migrations
                 {
                     MaterialId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaterialNameStart = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MaterialNameStart = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialNameFinish = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,26 +49,6 @@ namespace Vtorproekt.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Storages", x => x.StorageId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Taxes",
-                columns: table => new
-                {
-                    TaxId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DateTax = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TaxValue = table.Column<double>(type: "float", nullable: false),
-                    Limit1 = table.Column<double>(type: "float", nullable: false),
-                    Limit2 = table.Column<double>(type: "float", nullable: false),
-                    Limit3 = table.Column<double>(type: "float", nullable: false),
-                    Multi1 = table.Column<double>(type: "float", nullable: false),
-                    Multi2 = table.Column<double>(type: "float", nullable: false),
-                    Multi3 = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Taxes", x => x.TaxId);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,7 +71,8 @@ namespace Vtorproekt.Migrations
                     BaleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    MaterialId = table.Column<int>(type: "int", nullable: true)
+                    MaterialId = table.Column<int>(type: "int", nullable: true),
+                    isReady = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,27 +90,54 @@ namespace Vtorproekt.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Taxes",
+                columns: table => new
+                {
+                    TaxId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WorkTypeId = table.Column<int>(type: "int", nullable: false),
+                    MaterialId = table.Column<int>(type: "int", nullable: false),
+                    DateTax = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TaxValue = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Taxes", x => x.TaxId);
+                    table.ForeignKey(
+                        name: "FK_Taxes_Materials_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materials",
+                        principalColumn: "MaterialId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Taxes_WorkTypes_WorkTypeId",
+                        column: x => x.WorkTypeId,
+                        principalTable: "WorkTypes",
+                        principalColumn: "WorkTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Productions",
                 columns: table => new
                 {
                     ProductionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WorkTypeId = table.Column<int>(type: "int", nullable: false),
                     BaleId = table.Column<int>(type: "int", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: true),
                     Weight = table.Column<double>(type: "float", nullable: false),
                     StorageId = table.Column<int>(type: "int", nullable: false),
                     ProduceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TaxId = table.Column<int>(type: "int", nullable: false),
-                    Tax = table.Column<int>(type: "int", nullable: true),
-                    Employee = table.Column<int>(type: "int", nullable: true)
+                    MaterialId = table.Column<int>(type: "int", nullable: true),
+                    TaxId = table.Column<int>(type: "int", nullable: true),
+                    WorkTypeId = table.Column<int>(type: "int", nullable: true),
+                    ProducerEmployeeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Productions", x => x.ProductionId);
                     table.ForeignKey(
-                        name: "FK_Productions_Employees_Employee",
-                        column: x => x.Employee,
+                        name: "FK_Productions_Employees_ProducerEmployeeId",
+                        column: x => x.ProducerEmployeeId,
                         principalTable: "Employees",
                         principalColumn: "EmployeeId");
                     table.ForeignKey(
@@ -143,16 +152,15 @@ namespace Vtorproekt.Migrations
                         principalColumn: "StorageId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Productions_Taxes_Tax",
-                        column: x => x.Tax,
+                        name: "FK_Productions_Taxes_TaxId",
+                        column: x => x.TaxId,
                         principalTable: "Taxes",
                         principalColumn: "TaxId");
                     table.ForeignKey(
                         name: "FK_Productions_WorkTypes_WorkTypeId",
                         column: x => x.WorkTypeId,
                         principalTable: "WorkTypes",
-                        principalColumn: "WorkTypeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "WorkTypeId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -166,14 +174,14 @@ namespace Vtorproekt.Migrations
                 column: "MaterialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Productions_Employee",
-                table: "Productions",
-                column: "Employee");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Productions_MaterialId",
                 table: "Productions",
                 column: "MaterialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Productions_ProducerEmployeeId",
+                table: "Productions",
+                column: "ProducerEmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Productions_StorageId",
@@ -181,13 +189,23 @@ namespace Vtorproekt.Migrations
                 column: "StorageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Productions_Tax",
+                name: "IX_Productions_TaxId",
                 table: "Productions",
-                column: "Tax");
+                column: "TaxId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Productions_WorkTypeId",
                 table: "Productions",
+                column: "WorkTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxes_MaterialId",
+                table: "Taxes",
+                column: "MaterialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxes_WorkTypeId",
+                table: "Taxes",
                 column: "WorkTypeId");
         }
 
@@ -204,13 +222,13 @@ namespace Vtorproekt.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Materials");
-
-            migrationBuilder.DropTable(
                 name: "Storages");
 
             migrationBuilder.DropTable(
                 name: "Taxes");
+
+            migrationBuilder.DropTable(
+                name: "Materials");
 
             migrationBuilder.DropTable(
                 name: "WorkTypes");

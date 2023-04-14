@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Vtorproekt.Models
+namespace VtorP.Models
 {
     public class WorkType
     {

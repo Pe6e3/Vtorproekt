@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using Vtorproekt.Data;
-using Vtorproekt.Models;
+using VtorP.Data;
+using VtorP.Models;
 
-namespace Vtorproekt.Controllers
+namespace VtorP.Controllers
 {
     public class WorkTypesController : Controller
     {
-        private readonly VtorproektContext _db;
+        private readonly VtorPContext _db;
 
-        public WorkTypesController(VtorproektContext db)
+        public WorkTypesController(VtorPContext db)
         {
             _db = db;
         }
@@ -151,7 +151,7 @@ namespace Vtorproekt.Controllers
         {
             if (_db.WorkTypes == null)
             {
-                return Problem("Entity set 'VtorproektContext.WorkTypes'  is null.");
+                return Problem("Entity set 'VtorPContext.WorkTypes'  is null.");
             }
             var workType = await _db.WorkTypes.FindAsync(id);
             if (workType != null)

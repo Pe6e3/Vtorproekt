@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Vtorproekt.Models;
+namespace VtorP.Models;
 
 public class Storage
 {

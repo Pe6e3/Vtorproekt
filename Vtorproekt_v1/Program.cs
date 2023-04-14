@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Vtorproekt.Data;
+using VtorP.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddDbContext<VtorproektContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("VtorproektContext")));
+builder.Services.AddDbContext<VtorPContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("VtorPContext")));
 
 
 var app = builder.Build();

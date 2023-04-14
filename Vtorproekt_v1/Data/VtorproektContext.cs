@@ -1,11 +1,11 @@
-﻿using Vtorproekt.Models;
+﻿using VtorP.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Vtorproekt.Data;
+namespace VtorP.Data;
 
-public class VtorproektContext : DbContext
+public class VtorPContext : DbContext
 {
-    public VtorproektContext(DbContextOptions<VtorproektContext> options): base(options) { }
+    public VtorPContext(DbContextOptions<VtorPContext> options): base(options) { }
 
     public DbSet<Bale> Bales { get; set; }
     public DbSet<Employee> Employees { get; set; }

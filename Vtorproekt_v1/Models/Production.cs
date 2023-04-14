@@ -1,25 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Vtorproekt.Models
+namespace VtorP.Models
 {
     public class Production
     {
         [Key]
         public int ProductionId { get; set; }
-
-
-        [Display(Name = "Вид работы")]
-        [ForeignKey("WorkType")]
-        public int WorkTypeId { get; set; }
-        public virtual WorkType? WorkType { get; set; }
-
-
         
         [Display(Name = "Номер тюка/бэга")]
         [ForeignKey("Bale")]
         public int BaleId { get; set; }
-        public virtual Material? Material { get; set; }
 
 
 
@@ -31,7 +22,6 @@ namespace Vtorproekt.Models
         [Display(Name = "Склад")]
         [ForeignKey("Storage")]
         public int StorageId { get; set; }
-        public virtual Storage? Storage { get; set; }
 
 
         [Display (Name ="Дата и время производства")]
@@ -40,17 +30,11 @@ namespace Vtorproekt.Models
 
 
 
-        [Display(Name = "Тарификация")]
-        [ForeignKey("Tax")]
-        public int TaxId { get; set; }
-        [ForeignKey("Tax")]        public virtual Tax? TaxValue { get; set; }
 
-
-
-
-
-       
-        [ForeignKey("Employee")]
+        public virtual Material? Material { get; set; }
+        public virtual Storage? Storage { get; set; }
+        public virtual Tax? Tax { get; set; }
+        public virtual WorkType? WorkType { get; set; }
         public virtual Employee? Producer { get; set; }
 
 

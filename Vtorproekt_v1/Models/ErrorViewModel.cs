@@ -1,4 +1,4 @@
-namespace Vtorproekt_v1.Models
+namespace VtorP_v1.Models
 {
     public class ErrorViewModel
     {

@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Vtorproekt.Data;
-using Vtorproekt.Models;
+using VtorP.Data;
+using VtorP.Models;
 
-namespace Vtorproekt.Controllers
+namespace VtorP.Controllers
 {
     public class ProductionsController : Controller
     {
-        private readonly VtorproektContext _db;
+        private readonly VtorPContext _db;
 
-        public ProductionsController(VtorproektContext context)
+        public ProductionsController(VtorPContext context)
         {
             _db = context;
         }
@@ -22,13 +22,16 @@ namespace Vtorproekt.Controllers
         // GET: Productions
         public async Task<IActionResult> Index()
         {
-            var vtorproektContext = _db.Productions.Include(p => p.Storage).Include(p => p.WorkType);
+            var VtorPContext = _db.Productions
+                .Include(p => p.Storage)
+                .Include(p => p.WorkType)
+                .Include(p => p.Tax);
             ViewBag.Bale = _db.Bales.ToList();
             ViewBag.Employee = _db.Employees.ToList();
             ViewBag.Material = _db.Materials.ToList();
             ViewBag.Tax = _db.Taxes.ToList();
 
-            return View(await vtorproektContext.ToListAsync());
+            return View(await VtorPContext.ToListAsync());
         }
 
         // GET: Productions/Details/5
@@ -89,8 +92,8 @@ namespace Vtorproekt.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Storage"] = new SelectList(_db.Storages, "StorageId", "StorageName", production.StorageId);
-            ViewData["WorkType"] = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName", production.WorkTypeId);
+            ViewData["Storage"] = new SelectList(_db.Storages, "StorageId", "StorageName", production.Storage);
+            ViewData["WorkType"] = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeName", production.WorkType);
             return View(production);
         }
 
@@ -151,8 +154,8 @@ namespace Vtorproekt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StorageId"] = new SelectList(_db.Storages, "StorageId", "StorageId", production.StorageId);
-            ViewData["WorkTypeId"] = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeId", production.WorkTypeId);
+            ViewData["StorageId"] = new SelectList(_db.Storages, "StorageId", "StorageId", production.Storage);
+            ViewData["WorkTypeId"] = new SelectList(_db.WorkTypes, "WorkTypeId", "WorkTypeId", production.WorkType);
             return View(production);
         }
 
@@ -183,7 +186,7 @@ namespace Vtorproekt.Controllers
         {
             if (_db.Productions == null)
             {
-                return Problem("Entity set 'VtorproektContext.Productions'  is null.");
+                return Problem("Entity set 'VtorPContext.Productions'  is null.");
             }
             var production = await _db.Productions.FindAsync(id);
             if (production != null)

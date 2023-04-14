@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Vtorproekt.Data;
-using Vtorproekt.Models;
+using VtorP.Data;
+using VtorP.Models;
 
-namespace Vtorproekt.Controllers
+namespace VtorP.Controllers
 {
     public class MaterialsController : Controller
     {
-        private readonly VtorproektContext _db;
+        private readonly VtorPContext _db;
 
-        public MaterialsController(VtorproektContext db)
+        public MaterialsController(VtorPContext db)
         {
             _db = db;
         }
@@ -24,7 +24,7 @@ namespace Vtorproekt.Controllers
         {
               return _db.Materials != null ? 
                           View(await _db.Materials.ToListAsync()) :
-                          Problem("Entity set 'VtorproektContext.Materials'  is null.");
+                          Problem("Entity set 'VtorPContext.Materials'  is null.");
         }
 
         // GET: Materials/Details/5
@@ -143,7 +143,7 @@ namespace Vtorproekt.Controllers
         {
             if (_db.Materials == null)
             {
-                return Problem("Entity set 'VtorproektContext.Materials'  is null.");
+                return Problem("Entity set 'VtorPContext.Materials'  is null.");
             }
             var material = await _db.Materials.FindAsync(id);
             if (material != null)

@@ -1,5 +1,5 @@
-﻿@using Vtorproekt.Models;
-@model IEnumerable<Vtorproekt.Models.Production>
+﻿@using VtorP.Models;
+@model IEnumerable<VtorP.Models.Production>
 
 @{
     ViewData["Title"] = "Журнал производства";
@@ -15,46 +15,27 @@
 <table class="table">
     <thead>
         <tr class="table-header">
-            <th>
-                @Html.DisplayNameFor(model => model.BaleId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTypeId)
-            </th>
-            <th>
-                Кто произвел
-            </th>
-            <th>
-                Что произвел
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StorageId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProduceDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaxId)
-            </th>
-            <th>
-                Оплата
-            </th>
+            <th>@Html.DisplayNameFor(model => model.BaleId)</th>
+            <th>@Html.DisplayNameFor(model => model.WorkType.WorkTypeName)</th>
+            <th>Кто произвел</th>
+            <th>Что произвел</th>
+            <th>@Html.DisplayNameFor(model => model.Weight)</th>
+            <th>@Html.DisplayNameFor(model => model.StorageId)</th>
+            <th>@Html.DisplayNameFor(model => model.ProduceDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Tax.TaxValue)</th>
+            <th>Оплата</th>
             <th> Действия со строкой</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BaleId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkType.WorkTypeName)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.BaleId)</td>
+
+                <td>@Html.DisplayFor(modelItem => item.WorkType.WorkTypeName)</td>
+
                 <td>
                     @foreach (Bale bale in ViewBag.Bale)
                     {
@@ -63,8 +44,8 @@
                             @bale.Employee.EmployeeName
                         }
                     }
-
                 </td>
+
                 <td>
                     @foreach (Bale bale in ViewBag.Bale)
                     {
@@ -74,35 +55,37 @@
                         }
                     }
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Weight)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Storage.StorageAdress)
-                </td>
-                <td>
-                    @item.ProduceDate
-                </td>
+
+                <td>@Html.DisplayFor(modelItem => item.Weight)</td>
+                <td>@Html.DisplayFor(modelItem => item.Storage.StorageAdress)</td>
+                <td>@item.ProduceDate</td>
+
                 <td>
                     @foreach (Tax tax in ViewBag.Tax)
                     {
-                        if (tax.TaxId == item.TaxId)
+                        @foreach (Bale bale in ViewBag.Bale)
                         {
-                            @tax.TaxValue
-                            <slot>коп. </slot>
+
+                            if (tax.MaterialId == bale.MaterialId && bale.BaleId==item.BaleId)
+                            {
+                                @tax.TaxValue
+                                <slot>коп. </slot>   
+                                @*Если ИД материала в Тарифах совпадает с ИД материала в ПРОИЗВЕДЕННОМ тюке - пишем ставку этого тарифа*@
+                            }
                         }
                     }
                 </td>
 
                 <td>
-                    @foreach (Tax tax in ViewBag.Tax)
-                    {
-                        if (tax.TaxId == item.TaxId)
-                        {
-                            @(tax.TaxValue * item.Weight / 100);
-                            <slot>р. </slot>
-                        }
-                    }
+                    @*  @foreach (Tax tax in ViewBag.Tax)
+                {
+                if (tax.TaxId == item.Tax.TaxId)
+                {
+                @(tax.TaxValue * item.Weight / 100)
+                ;
+                <slot>р. </slot>
+                }
+                }*@
                 </td>
 
                 <td>
@@ -111,6 +94,7 @@
                     <a asp-action="Delete" asp-route-id="@item.ProductionId"><img src="/ico/delete2.png" class="icon" /></a>
                     @*     <a asp-action="Details" asp-route-id="@item.ProductionId"><img src="/ico/info1.png" class="icon"/></a>*@
                 </td>
+
             </tr>
         }
     </tbody>

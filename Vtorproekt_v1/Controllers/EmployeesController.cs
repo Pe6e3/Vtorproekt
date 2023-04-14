@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Vtorproekt.Data;
-using Vtorproekt.Models;
+using VtorP.Data;
+using VtorP.Models;
 
-namespace Vtorproekt.Controllers
+namespace VtorP.Controllers
 {
     public class EmployeesController : Controller
     {
-        private readonly VtorproektContext _context;
+        private readonly VtorPContext _context;
 
-        public EmployeesController(VtorproektContext context)
+        public EmployeesController(VtorPContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace Vtorproekt.Controllers
         {
               return _context.Employees != null ? 
                           View(await _context.Employees.ToListAsync()) :
-                          Problem("Entity set 'VtorproektContext.Employees'  is null.");
+                          Problem("Entity set 'VtorPContext.Employees'  is null.");
         }
 
         // GET: Employees/Details/5
@@ -143,7 +143,7 @@ namespace Vtorproekt.Controllers
         {
             if (_context.Employees == null)
             {
-                return Problem("Entity set 'VtorproektContext.Employees'  is null.");
+                return Problem("Entity set 'VtorPContext.Employees'  is null.");
             }
             var employee = await _context.Employees.FindAsync(id);
             if (employee != null)

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using Vtorproekt_v1.Models;
+using VtorP_v1.Models;
 
-namespace Vtorproekt_v1.Controllers
+namespace VtorP_v1.Controllers
 {
     public class HomeController : Controller
     {

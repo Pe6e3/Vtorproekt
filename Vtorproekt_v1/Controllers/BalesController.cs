@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Vtorproekt.Data;
-using Vtorproekt.Models;
+using VtorP.Data;
+using VtorP.Models;
 
-namespace Vtorproekt.Controllers
+namespace VtorP.Controllers
 {
     public class BalesController : Controller
     {
-        private readonly VtorproektContext _db;
+        private readonly VtorPContext _db;
 
-        public BalesController(VtorproektContext context)
+        public BalesController(VtorPContext context)
         {
             _db = context;
         }
@@ -22,9 +22,9 @@ namespace Vtorproekt.Controllers
         // GET: Bales
         public async Task<IActionResult> Index()
         {
-            var vtorproektContext = _db.Bales.Include(b => b.Employee).Include(b => b.Material);
+            var VtorPContext = _db.Bales.Include(b => b.Employee).Include(b => b.Material);
             ViewBag.Production = _db.Productions.ToList();
-            return View(await vtorproektContext.ToListAsync());
+            return View(await VtorPContext.ToListAsync());
         }
 
         // GET: Bales/Details/5
@@ -165,7 +165,7 @@ namespace Vtorproekt.Controllers
         {
             if (_db.Bales == null)
             {
-                return Problem("Entity set 'VtorproektContext.Bales'  is null.");
+                return Problem("Entity set 'VtorPContext.Bales'  is null.");
             }
             var bale = await _db.Bales.FindAsync(id);
             if (bale != null)

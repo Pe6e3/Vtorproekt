@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Vtorproekt.Data;
-using Vtorproekt.Models;
+using VtorP.Data;
+using VtorP.Models;
 
-namespace Vtorproekt.Controllers
+namespace VtorP.Controllers
 {
     public class TaxesController : Controller
     {
-        private readonly VtorproektContext _db;
+        private readonly VtorPContext _db;
 
-        public TaxesController(VtorproektContext context)
+        public TaxesController(VtorPContext context)
         {
             _db = context;
         }
@@ -166,7 +166,7 @@ namespace Vtorproekt.Controllers
         {
             if (_db.Taxes == null)
             {
-                return Problem("Entity set 'VtorproektContext.Taxes'  is null.");
+                return Problem("Entity set 'VtorPContext.Taxes'  is null.");
             }
             var tax = await _db.Taxes.FindAsync(id);
             if (tax != null)

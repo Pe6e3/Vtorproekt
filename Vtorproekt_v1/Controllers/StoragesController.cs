@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Vtorproekt.Data;
-using Vtorproekt.Models;
+using VtorP.Data;
+using VtorP.Models;
 
-namespace Vtorproekt.Controllers
+namespace VtorP.Controllers
 {
     public class StoragesController : Controller
     {
-        private readonly VtorproektContext _db;
+        private readonly VtorPContext _db;
 
-        public StoragesController(VtorproektContext db)
+        public StoragesController(VtorPContext db)
         {
             _db = db;
         }
@@ -24,7 +24,7 @@ namespace Vtorproekt.Controllers
         {
               return _db.Storages != null ? 
                           View(await _db.Storages.ToListAsync()) :
-                          Problem("Entity set 'VtorproektContext.Storages'  is null.");
+                          Problem("Entity set 'VtorPContext.Storages'  is null.");
         }
 
         // GET: Storages/Details/5
@@ -143,7 +143,7 @@ namespace Vtorproekt.Controllers
         {
             if (_db.Storages == null)
             {
-                return Problem("Entity set 'VtorproektContext.Storages'  is null.");
+                return Problem("Entity set 'VtorPContext.Storages'  is null.");
             }
             var storage = await _db.Storages.FindAsync(id);
             if (storage != null)

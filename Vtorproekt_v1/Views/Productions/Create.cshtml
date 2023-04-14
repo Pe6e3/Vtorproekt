@@ -1,5 +1,5 @@
-﻿@using Vtorproekt.Models;
-@model Vtorproekt.Models.Production
+﻿@using VtorP.Models;
+@model VtorP.Models.Production
 
 @{
     ViewData["Title"] = "Новая строка производства";
@@ -14,40 +14,30 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="WorkTypeId" class="control-label">@Html.DisplayNameFor(model=>model.WorkType.WorkTypeId)</label>
-              
-            @*№ тюка и фамилия*@
-            <div class="form-group">
-                <label asp-for="BaleId" class="control-label">@Html.DisplayNameFor(model=>model.BaleId)</label>
-                <select asp-for="BaleId" class="form-control">
-                    @foreach (Bale bale in ViewBag.BaleEmpty)
-                    {
-                        <option value="@bale.BaleId"> @bale.BaleId - @bale.Material.MaterialNameStart (@bale.Employee.EmployeeName)</option>
-                    }
-                </select>
-                
 
-                @*Вид работы*@
-                <select asp-for="WorkTypeId" class="form-control">
-                    @foreach (WorkType workType in ViewBag.WorkType)
-                    {
-                        <option value=@workType.WorkTypeId>@workType.WorkTypeName</option>
-                    }
-                </select>
-            </div>
-            
-            
-            @*Вес*@
+            @* № тюка и фамилия*@
+            <div class="form-group">
+                <div class="form-group">
+                    <label asp-for="BaleId" class="control-label">@Html.DisplayNameFor(model=>model.BaleId)</label>
+                    <select asp-for="BaleId" class="form-control">
+                        @foreach (Bale bale in ViewBag.BaleEmpty)
+                        {
+                            <option value="@bale.BaleId"> @bale.BaleId - @bale.Material.MaterialNameFinish (@bale.Employee.EmployeeName)</option>
+                        }
+                    </select>
+                </div>
                 <span asp-validation-for="BaleId" class="text-danger"></span>
             </div>
+
+
+            @*Вес*@
             <div class="form-group">
                 <label asp-for="Weight" class="control-label"></label>
                 <input asp-for="Weight" class="form-control" />
                 <span asp-validation-for="Weight" class="text-danger"></span>
             </div>
-            
-            
+
+
             @*Склад*@
             <div class="form-group">
                 <label asp-for="StorageId" class="control-label">@Html.DisplayNameFor(model=>model.Storage.StorageId) </label>
@@ -58,10 +48,10 @@
                         <option value="@storage.StorageId">@storage.StorageAdress</option>
                     }
                 </select>
-                
-                
-                @*Дата производства*@
             </div>
+
+
+            @*Дата производства*@
             <div class="form-group">
                 <label asp-for="ProduceDate" class="control-label">@Html.DisplayNameFor(model=>model.ProduceDate)</label>
                 <input type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" asp-for="ProduceDate" class="form-control" />
@@ -69,20 +59,7 @@
             </div>
 
 
-            @*Вид работы*@
-            <div class="form-group">
-                <label asp-for="TaxId" class="control-label"></label>
-                <select asp-for="TaxId" class="form-control">
 
-                    @foreach (Tax tax in ViewBag.Tax)
-                    {
-                        <option value="@tax.TaxId">@tax.WorkType.WorkTypeName</option>
-                    }
-                </select>
-                <span asp-validation-for="TaxId" class="text-danger"></span>
-            </div>
-            
-            
             @*Иконка Создать*@
             <div class="form-group">
                 <button type="submit" style="background: none; border: none;">

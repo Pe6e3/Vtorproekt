@@ -1,5 +1,5 @@
-﻿@using Vtorproekt.Models;
-@model Vtorproekt.Models.Bale
+﻿@using VtorP.Models;
+@model VtorP.Models.Bale
 
 @{
     ViewData["Title"] = "Новый тюк";
@@ -33,7 +33,7 @@
 
                     @foreach(Material material in ViewBag.Material)
                     {
-                        <option value = "@material.MaterialId">@material.MaterialNameStart</option>
+                        <option value = "@material.MaterialId">@material.MaterialNameFinish</option>
                     }
                 </select>
 
