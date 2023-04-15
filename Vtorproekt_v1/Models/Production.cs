@@ -29,6 +29,9 @@ namespace VtorP.Models
         public DateTime ProduceDate { get; set; }
 
 
+        [Display(Name = "Тариф")]
+        public int TaxId { get; set; } = 1;
+
 
 
         public virtual Material? Material { get; set; }
@@ -38,6 +41,10 @@ namespace VtorP.Models
         public virtual Employee? Producer { get; set; }
 
 
+        public Production()
+        {
+            TaxId = 1;
+        }
 
 
 
