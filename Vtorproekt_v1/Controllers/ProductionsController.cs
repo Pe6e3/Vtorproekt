@@ -92,7 +92,8 @@ namespace VtorP.Controllers
                 Material? material = _db.Materials.Where(getMaterial => getMaterial.MaterialId == bale.MaterialId).FirstOrDefault(); // Нашли Материал, из которого изготовили Тюк
                 Tax? tax = _db.Taxes.Where(getTax => getTax.MaterialId ==material.MaterialId).FirstOrDefault();  // нашли тариф, который распространяется на тот Материал, из которого изготовили Тюк
                 production.TaxId = tax.TaxId;
-                production.WorkType = tax.WorkType;
+                production.MaterialId = material.MaterialId;
+                production.WorkTypeId = tax.WorkTypeId;
 
 
                 _db.Add(production);

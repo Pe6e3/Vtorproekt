@@ -30,7 +30,13 @@ namespace VtorP.Models
 
 
         [Display(Name = "Тариф")]
-        public int TaxId { get; set; } = 1;
+        public int TaxId { get; set; }
+
+        [Display(Name = "Сырье")]
+        public int MaterialId { get; set; }
+
+        [Display(Name = "Вид работы")]
+        public int WorkTypeId { get; set; }
 
 
 

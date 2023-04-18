@@ -46,33 +46,27 @@
                     }
                 </td>
 
-                <td>
-                    @foreach (Bale bale in ViewBag.Bale)
-                    {
-                        if (bale.BaleId == item.BaleId)
-                        {
-                            @bale.Material.MaterialNameFinish
-                        }
-                    }
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Material.MaterialNameFinish)</td>
 
-                <td>@Html.DisplayFor(modelItem => item.Weight)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                    <slot>кг </slot>
+                </td>
 
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Tax.TaxValue)
+                    @(item.Tax.TaxValue / 100)
+                    <slot>руб. </slot>
                 </td>
+
                 <td>
-                    @foreach (Tax tax in ViewBag.Tax)
-                    {
-                        if (tax.TaxId == item.Tax.TaxId)
-                        {
-                            @(tax.TaxValue * item.Weight / 100)
-                            ;
-                            <slot>р. </slot>
-                        }
-                    }
+                    @(item.Tax.TaxValue * item.Weight / 100)
+                    <slot>руб. </slot>
                 </td>
+
+
+
+                
                 <td>@Html.DisplayFor(modelItem => item.Storage.StorageAdress)</td>
                 <td>@item.ProduceDate</td>
 
