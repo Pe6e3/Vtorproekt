@@ -15,15 +15,15 @@
 <table class="table">
     <thead>
         <tr class="table-header">
-            <th>@Html.DisplayNameFor(model => model.BaleId)</th>
-            <th>@Html.DisplayNameFor(model => model.WorkType.WorkTypeName)</th>
+            <th>№ тюка</th>
+            <th>Вид работы</th>
             <th>Кто произвел</th>
             <th>Что произвел</th>
-            <th>@Html.DisplayNameFor(model => model.Weight)</th>
-            <th>@Html.DisplayNameFor(model => model.StorageId)</th>
-            <th>@Html.DisplayNameFor(model => model.ProduceDate)</th>
+            <th>Вес тюка</th>
             <th>@Html.DisplayNameFor(model => model.Tax.TaxValue)</th>
             <th>Оплата</th>
+            <th>@Html.DisplayNameFor(model => model.StorageId)</th>
+            <th>@Html.DisplayNameFor(model => model.ProduceDate)</th>
             <th> Действия со строкой</th>
         </tr>
     </thead>
@@ -51,42 +51,30 @@
                     {
                         if (bale.BaleId == item.BaleId)
                         {
-                            @bale.Material.MaterialNameStart
+                            @bale.Material.MaterialNameFinish
                         }
                     }
                 </td>
 
                 <td>@Html.DisplayFor(modelItem => item.Weight)</td>
-                <td>@Html.DisplayFor(modelItem => item.Storage.StorageAdress)</td>
-                <td>@item.ProduceDate</td>
 
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tax.TaxValue)
+                </td>
                 <td>
                     @foreach (Tax tax in ViewBag.Tax)
                     {
-                        @foreach (Bale bale in ViewBag.Bale)
+                        if (tax.TaxId == item.Tax.TaxId)
                         {
-
-                            if (tax.MaterialId == bale.MaterialId && bale.BaleId==item.BaleId)
-                            {
-                                @tax.TaxValue
-                                <slot>коп. </slot>   
-                                @*Если ИД материала в Тарифах совпадает с ИД материала в ПРОИЗВЕДЕННОМ тюке - пишем ставку этого тарифа*@
-                            }
+                            @(tax.TaxValue * item.Weight / 100)
+                            ;
+                            <slot>р. </slot>
                         }
                     }
                 </td>
-
-                <td>
-                    @*  @foreach (Tax tax in ViewBag.Tax)
-                {
-                if (tax.TaxId == item.Tax.TaxId)
-                {
-                @(tax.TaxValue * item.Weight / 100)
-                ;
-                <slot>р. </slot>
-                }
-                }*@
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Storage.StorageAdress)</td>
+                <td>@item.ProduceDate</td>
 
                 <td>
 

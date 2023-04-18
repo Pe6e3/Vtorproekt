@@ -64,7 +64,7 @@ namespace VtorP.Controllers
             ViewBag.Storager = _db.Employees.ToList();
             ViewBag.Material = _db.Materials.ToList();
 
-            ViewBag.BaleEmpty = _db.Bales.Where(bale=>bale.isReady==false).ToList();
+            ViewBag.BaleEmpty = _db.Bales.Where(bale => bale.isReady == false).ToList();
 
 
 
@@ -76,16 +76,23 @@ namespace VtorP.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductionId,WorkTypeId,BaleId,Weight,StorageId,ProduceDate,TaxId")] Production production)
+        public async Task<IActionResult> Create([Bind("ProductionId,WorkTypeId,BaleId,Weight,StorageId,ProduceDate")] Production production)
         {
             if (ModelState.IsValid)
             {
-                Bale bale = _db.Bales.Where(newBale => newBale.BaleId == production.BaleId).FirstOrDefault();
+                Bale? bale = _db.Bales.Where(newBale => newBale.BaleId == production.BaleId).FirstOrDefault(); //  нашли Тюк, который изготовили
                 if (bale != null)
                 {
                     bale.isReady = true;
                     _db.Update(bale);
                 }
+
+                
+                //@*Если ИД материала в Тарифах совпадает с ИД материала в ПРОИЗВЕДЕННОМ тюке - пишем ставку этого тарифа *@
+                Material? material = _db.Materials.Where(getMaterial => getMaterial.MaterialId == bale.MaterialId).FirstOrDefault(); // Нашли Материал, из которого изготовили Тюк
+                Tax? tax = _db.Taxes.Where(getTax => getTax.MaterialId ==material.MaterialId).FirstOrDefault();  // нашли тариф, который распространяется на тот Материал, из которого изготовили Тюк
+                production.TaxId = tax.TaxId;
+                production.WorkType = tax.WorkType;
 
 
                 _db.Add(production);
